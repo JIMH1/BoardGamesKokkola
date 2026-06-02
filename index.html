@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BoardGamesKokkola – Lautapelitapahtuma</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;600;700&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<script src="https://elfsightcdn.com/platform.js" async></script>
+<style>
+  :root {
+    --cream: #e8dcc8; --dark: #1a1008; --red: #8b1a1a; --red-bright: #c0211f;
+    --gold: #c9972a; --gold-light: #e8b84b; --black: #0d0a05;
+    --text-dark: #1a1008; --stripe-red: rgba(139,26,26,0.85);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Crimson Pro', Georgia, serif; background: var(--cream); color: var(--text-dark); min-height: 100vh; overflow-x: hidden; }
+  body::before {
+    content: ''; position: fixed; inset: 0;
+    background: conic-gradient(from 270deg at 50% 110%,
+      var(--stripe-red) 0deg, var(--cream) 13deg, var(--stripe-red) 26deg, var(--cream) 39deg,
+      var(--stripe-red) 52deg, var(--cream) 65deg, var(--stripe-red) 78deg, var(--cream) 91deg,
+      var(--stripe-red) 104deg, var(--cream) 117deg, var(--stripe-red) 130deg, var(--cream) 143deg,
+      var(--stripe-red) 156deg, var(--cream) 169deg, var(--stripe-red) 180deg);
+    opacity: 0.18; z-index: 0; pointer-events: none;
+  }
+  header { position: sticky; top: 0; z-index: 100; background: var(--black); border-bottom: 3px solid var(--gold); box-shadow: 0 4px 20px rgba(0,0,0,0.6); }
+  .header-inner { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; min-height: 70px; }
+  .logo-title { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; cursor: pointer; }
+  .logo-title img { height: 52px; width: auto; filter: drop-shadow(0 2px 6px rgba(201,151,42,0.5)); }
+  .site-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; color: var(--cream); letter-spacing: 0.05em; line-height: 1.1; }
+  .site-title span { display: block; color: var(--gold-light); font-size: 0.85rem; letter-spacing: 0.18em; }
+  nav { display: flex; align-items: center; gap: 0.25rem; flex-wrap: wrap; }
+  .nav-link { font-family: 'Oswald', sans-serif; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--cream); padding: 0.45rem 0.85rem; border-radius: 3px; border: 1px solid transparent; cursor: pointer; transition: all 0.2s ease; white-space: nowrap; background: none; }
+  .nav-link:hover, .nav-link.active { background: var(--red); border-color: var(--gold); color: var(--gold-light); }
+  .lang-switcher { display: flex; gap: 0.25rem; margin-left: 0.5rem; border-left: 1px solid rgba(201,151,42,0.4); padding-left: 0.75rem; }
+  .lang-btn { font-family: 'Oswald', sans-serif; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; background: transparent; color: rgba(232,220,200,0.6); border: 1px solid rgba(201,151,42,0.3); padding: 0.3rem 0.55rem; border-radius: 3px; cursor: pointer; transition: all 0.2s; }
+  .lang-btn:hover, .lang-btn.active { background: var(--gold); color: var(--black); border-color: var(--gold); }
+  main { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+  .page { display: none; animation: fadeIn 0.4s ease; }
+  .page.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+  /* HERO */
+  .hero { text-align: center; padding: 3rem 1rem 2rem; }
+  .hero-logo { width: 160px; filter: drop-shadow(0 4px 20px rgba(201,151,42,0.6)); margin-bottom: 1.5rem; animation: floatLogo 3s ease-in-out infinite; }
+  @keyframes floatLogo { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+  .hero h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3rem, 9vw, 6.5rem); line-height: 0.9; color: var(--dark); letter-spacing: 0.02em; }
+  .hero h1 .red { color: var(--red-bright); display: block; }
+  .hero-sub { display: inline-block; background: var(--dark); color: var(--cream); font-family: 'Oswald', sans-serif; font-size: clamp(0.9rem, 2.5vw, 1.15rem); letter-spacing: 0.22em; text-transform: uppercase; padding: 0.45rem 2rem; margin: 0.75rem 0 1.5rem; transform: skewX(-4deg); }
+  .hero-date { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 7vw, 4.5rem); color: var(--red-bright); letter-spacing: 0.05em; line-height: 1; }
+  .hero-date-sub { font-family: 'Oswald', sans-serif; font-weight: 700; letter-spacing: 0.2em; font-size: 0.9rem; color: var(--dark); text-transform: uppercase; margin-bottom: 0.5rem; }
+  .hero-free-badge { display: inline-block; background: var(--gold); color: var(--black); font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 1rem; letter-spacing: 0.2em; text-transform: uppercase; padding: 0.5rem 1.75rem; margin: 0.5rem 0 1.5rem; }
+  .hero-divider { width: 80px; height: 3px; background: linear-gradient(90deg, transparent, var(--gold), transparent); margin: 1.5rem auto; }
+  .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; margin: 2rem 0; }
+  .feature-pill { background: var(--dark); color: var(--gold-light); font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 0.9rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.75rem 1rem; text-align: center; border: 1px solid var(--gold); position: relative; overflow: hidden; transition: transform 0.2s; }
+  .feature-pill::after { content: ''; position: absolute; inset: 0; background: var(--red); transform: scaleX(0); transform-origin: left; transition: transform 0.25s ease; z-index: 0; }
+  .feature-pill:hover { transform: translateY(-3px); }
+  .feature-pill:hover::after { transform: scaleX(1); }
+  .feature-pill span { position: relative; z-index: 1; }
+  .venue-box { background: var(--dark); border: 2px solid var(--gold); color: var(--cream); padding: 1.25rem 2rem; font-family: 'Oswald', sans-serif; letter-spacing: 0.12em; font-size: 1rem; text-transform: uppercase; display: inline-block; margin-top: 1.5rem; }
+  /* SECTIONS */
+  .page-header { border-bottom: 3px solid var(--red); margin-bottom: 2rem; padding-bottom: 1rem; }
+  .page-header h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.2rem, 6vw, 4rem); color: var(--dark); letter-spacing: 0.03em; line-height: 1; }
+  .page-header h2 em { color: var(--red-bright); font-style: normal; }
+  /* CARDS */
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 1.5rem; }
+  .card { background: var(--dark); border: 1px solid rgba(201,151,42,0.4); padding: 1.5rem; position: relative; overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; }
+  .card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: linear-gradient(180deg, var(--gold), var(--red)); }
+  .card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(0,0,0,0.4); }
+  .card h3 { font-family: 'Oswald', sans-serif; font-size: 1.2rem; font-weight: 700; color: var(--gold-light); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.75rem; }
+  .card p { color: rgba(232,220,200,0.85); font-size: 1rem; line-height: 1.6; }
+  .card .card-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+  /* SCHEDULE */
+  .schedule-table { width: 100%; border-collapse: collapse; margin-top: 1.5rem; }
+  .schedule-table th { background: var(--dark); color: var(--gold-light); font-family: 'Oswald', sans-serif; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.75rem 1rem; text-align: left; border-bottom: 2px solid var(--gold); }
+  .schedule-table td { padding: 0.75rem 1rem; border-bottom: 1px solid rgba(26,16,8,0.2); font-size: 1rem; }
+  .schedule-table tr:nth-child(even) td { background: rgba(26,16,8,0.06); }
+  .schedule-table tr:hover td { background: rgba(139,26,26,0.1); }
+  .day-header td { background: var(--red) !important; color: var(--cream); font-family: 'Oswald', sans-serif; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; }
+  /* SOCIAL */
+  .instagram-section { text-align: center; }
+  .insta-handle { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: var(--red-bright); letter-spacing: 0.08em; margin: 0.5rem 0 1.5rem; }
+  .insta-embed-wrapper { background: var(--dark); border: 2px solid rgba(201,151,42,0.4); padding: 2rem; max-width: 700px; margin: 0 auto; }
+  .insta-embed-placeholder { background: rgba(201,151,42,0.08); border: 2px dashed rgba(201,151,42,0.35); padding: 3rem 2rem; text-align: center; color: rgba(232,220,200,0.7); }
+  .insta-embed-placeholder p { font-family: 'Oswald', sans-serif; letter-spacing: 0.1em; font-size: 0.9rem; text-transform: uppercase; margin-top: 1rem; color: var(--gold-light); }
+  .insta-embed-placeholder .ig-icon { font-size: 3.5rem; display: block; margin-bottom: 0.5rem; }
+  .social-bar { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; flex-wrap: wrap; }
+  .social-btn { font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 0.9rem; letter-spacing: 0.15em; text-transform: uppercase; display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; text-decoration: none; border: 2px solid; transition: all 0.2s; }
+  .social-btn.instagram { color: #e4405f; border-color: #e4405f; }
+  .social-btn.instagram:hover { background: #e4405f; color: white; }
+  .social-btn.facebook { color: #1877f2; border-color: #1877f2; }
+  .social-btn.facebook:hover { background: #1877f2; color: white; }
+  .social-btn.tiktok { color: #010101; border-color: #010101; }
+  .social-btn.tiktok:hover { background: #010101; color: white; }
+  .social-logo { width: 20px; height: 20px; display: inline-block; vertical-align: middle; fill: currentColor; flex-shrink: 0; }
+  .social-btn .social-logo { width: 18px; height: 18px; margin-right: 4px; vertical-align: -3px; }
+  /* CONTACT */
+  .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; margin-top: 1.5rem; }
+  .contact-card { background: var(--dark); border: 1px solid rgba(201,151,42,0.4); padding: 1.75rem; text-align: center; }
+  .contact-card .cc-icon { font-size: 2.5rem; display: block; margin-bottom: 0.75rem; }
+  .contact-card > .social-logo { width: 2.5rem; height: 2.5rem; display: block; margin: 0 auto 0.75rem; fill: var(--gold-light); }
+  .contact-card h3 { font-family: 'Oswald', sans-serif; color: var(--gold-light); letter-spacing: 0.1em; text-transform: uppercase; font-size: 1rem; margin-bottom: 0.5rem; }
+  .contact-card a, .contact-card p { color: rgba(232,220,200,0.8); font-size: 1rem; text-decoration: none; word-break: break-word; }
+  .contact-card a:hover { color: var(--gold-light); }
+  /* CONTACT FORM */
+  .contact-form-wrap { margin-top: 2.5rem; background: var(--dark); border: 1px solid rgba(201,151,42,0.4); padding: 2rem 2.5rem; position: relative; }
+  .contact-form-wrap::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: linear-gradient(180deg, var(--gold), var(--red)); }
+  .contact-form-wrap h3 { font-family: 'Oswald', sans-serif; font-size: 1.3rem; font-weight: 700; color: var(--gold-light); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 1.5rem; }
+  .form_settings p { display: flex; flex-direction: column; gap: 0.35rem; margin-bottom: 1.1rem; }
+  .form_settings span { font-family: 'Oswald', sans-serif; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); }
+  .form_settings input.contact, .form_settings textarea.contact { background: rgba(255,255,255,0.06); border: 1px solid rgba(201,151,42,0.4); color: var(--cream); font-family: 'Crimson Pro', Georgia, serif; font-size: 1rem; padding: 0.6rem 0.9rem; width: 100%; transition: border-color 0.2s; }
+  .form_settings input.contact:focus, .form_settings textarea.contact:focus { outline: none; border-color: var(--gold); }
+  .form_settings textarea.contact { resize: vertical; min-height: 140px; }
+  .form_settings input.submit { font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 0.9rem; letter-spacing: 0.18em; text-transform: uppercase; background: var(--gold); color: var(--black); border: none; padding: 0.85rem 2.5rem; cursor: pointer; transition: background 0.2s, transform 0.2s; }
+  .form_settings input.submit:hover { background: var(--gold-light); transform: translateY(-2px); }
+  /* MAP */
+  .map-container { margin-top: 1.5rem; border: 2px solid var(--gold); overflow: hidden; }
+  .map-container iframe { width: 100%; height: 380px; display: block; border: none; filter: sepia(0.3) contrast(1.05); }
+  /* PARTNERS */
+  .partners-intro { font-size: 1.15rem; line-height: 1.7; color: var(--text-dark); max-width: 700px; margin-bottom: 2.5rem; }
+  .partners-tier { margin-bottom: 3rem; }
+  .partners-tier-title { font-family: 'Oswald', sans-serif; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); border-top: 1px solid rgba(201,151,42,0.4); padding-top: 1.25rem; margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.75rem; }
+  .partners-tier-title::after { content: ''; flex: 1; height: 1px; background: rgba(201,151,42,0.25); }
+  .partners-grid { display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+  .partner-card { background: var(--dark); border: 1px solid rgba(201,151,42,0.35); display: flex; align-items: center; gap: 1.25rem; padding: 1.5rem; transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s; text-decoration: none; position: relative; overflow: hidden; }
+  .partner-card::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: linear-gradient(180deg, var(--gold), var(--red)); }
+  .partner-card:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(0,0,0,0.35); border-color: var(--gold); }
+  .partner-logo-wrap { flex-shrink: 0; width: 80px; height: 80px; background: rgba(232,220,200,0.07); border: 1px solid rgba(201,151,42,0.25); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+  .partner-logo-wrap img { width: 100%; height: 100%; object-fit: contain; padding: 6px; }
+  .partner-logo-wrap .partner-emoji { font-size: 2rem; }
+  .partner-info { flex: 1; min-width: 0; }
+  .partner-name { font-family: 'Oswald', sans-serif; font-size: 1.1rem; font-weight: 700; color: var(--gold-light); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.3rem; }
+  .partner-desc { color: rgba(232,220,200,0.7); font-size: 0.95rem; line-height: 1.5; }
+  .partner-badge { font-family: 'Oswald', sans-serif; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; padding: 0.2rem 0.55rem; border-radius: 2px; margin-top: 0.5rem; display: inline-block; background: var(--gold); color: var(--black); }
+  .become-partner { margin-top: 3rem; background: var(--dark); border: 2px solid var(--gold); padding: 2rem 2.5rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
+  .become-partner-text h3 { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: var(--gold-light); letter-spacing: 0.05em; margin-bottom: 0.4rem; }
+  .become-partner-text p { color: rgba(232,220,200,0.75); font-size: 1rem; line-height: 1.5; max-width: 520px; }
+  .become-partner-btn { font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 0.95rem; letter-spacing: 0.18em; text-transform: uppercase; background: var(--gold); color: var(--black); border: none; padding: 0.9rem 2rem; cursor: pointer; text-decoration: none; display: inline-block; transition: background 0.2s, transform 0.2s; flex-shrink: 0; }
+  .become-partner-btn:hover { background: var(--gold-light); transform: translateY(-2px); }
+  /* FOOTER */
+  footer { position: relative; z-index: 1; background: var(--black); border-top: 3px solid var(--gold); text-align: center; padding: 2rem 1.5rem; color: rgba(232,220,200,0.5); font-family: 'Oswald', sans-serif; letter-spacing: 0.12em; font-size: 0.8rem; text-transform: uppercase; }
+  /* DIRECTIONS POPUP */
+  .popup-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.75); z-index: 500; align-items: center; justify-content: center; padding: 1rem; }
+  .popup-overlay.open { display: flex; }
+  .popup-box { background: var(--cream); max-width: 560px; width: 100%; max-height: 90vh; overflow-y: auto; border: 3px solid var(--gold); position: relative; animation: fadeIn 0.25s ease; }
+  .popup-header { background: var(--dark); padding: 1.25rem 1.5rem; display: flex; align-items: center; justify-content: space-between; border-bottom: 2px solid var(--gold); }
+  .popup-header h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; color: var(--gold-light); letter-spacing: 0.05em; margin: 0; }
+  .popup-close { background: none; border: 1px solid rgba(201,151,42,0.5); color: var(--cream); font-size: 1.2rem; cursor: pointer; padding: 0.2rem 0.6rem; font-family: 'Oswald', sans-serif; transition: background 0.2s; }
+  .popup-close:hover { background: var(--red); }
+  .popup-body { padding: 1.5rem; }
+  .popup-map { width: 100%; height: 240px; border: 2px solid var(--gold); display: block; margin-bottom: 1.25rem; filter: sepia(0.2) contrast(1.05); }
+  .popup-route { background: var(--dark); border-left: 4px solid var(--gold); padding: 1rem 1.25rem; margin-bottom: 1rem; }
+  .popup-route h4 { font-family: 'Oswald', sans-serif; font-size: 0.95rem; font-weight: 700; color: var(--gold-light); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.6rem; }
+  .popup-route ol { color: rgba(232,220,200,0.85); font-size: 0.97rem; line-height: 1.7; padding-left: 1.4rem; }
+  .popup-route ol li { margin-bottom: 0.2rem; }
+  .popup-directions-btn { display: inline-block; margin-top: 0.25rem; font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase; background: var(--gold); color: var(--black); padding: 0.55rem 1.25rem; text-decoration: none; transition: background 0.2s; }
+  .popup-directions-btn:hover { background: var(--gold-light); }
+  .venue-link-btn { background: none; border: 1px solid var(--gold); color: var(--gold-light); font-family: 'Oswald', sans-serif; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.13em; text-transform: uppercase; padding: 0.4rem 0.9rem; cursor: pointer; margin-top: 0.75rem; display: inline-block; transition: background 0.2s, color 0.2s; }
+  .venue-link-btn:hover { background: var(--gold); color: var(--black); }
+  footer .footer-logo { height: 48px; filter: grayscale(1) opacity(0.5); margin-bottom: 0.75rem; display: block; margin-left: auto; margin-right: auto; }
+  @media (max-width: 640px) {
+    .header-inner { padding: 0.75rem 1rem; justify-content: center; }
+    .lang-switcher { margin-left: 0; border-left: none; padding-left: 0; }
+    nav { justify-content: center; }
+    .hero { padding: 2rem 0.5rem 1rem; }
+    .become-partner { flex-direction: column; }
+    .contact-form-wrap { padding: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+    <div class="lang-switcher">
+      <button class="lang-btn active" onclick="setLang('fi')" id="btn-fi">FI</button>
+      <button class="lang-btn" onclick="setLang('sv')" id="btn-sv">SV</button>
+      <button class="lang-btn" onclick="setLang('en')" id="btn-en">EN</button>
+    </div>
+  <div class="header-inner">
+    <div class="logo-title" onclick="navigate('home','fi')">
+      <img src="logo.png" alt="BGK Logo" id="header-logo">
+      <div class="site-title">
+        BoardGamesKokkola
+        <span id="header-tagline">Lautapelitapahtuma</span>
+      </div>
+    </div>
+    <nav id="main-nav"></nav>
+
+  </div>
+</header>
+
+<main id="main-content"></main>
+
+<footer>
+  <span id="footer-text">Copyright: Juha-Matti Huhtala 2026</span>
+</footer>
+
+<!-- Directions popup FI -->
+<div class="popup-overlay" id="popup-fi">
+  <div class="popup-box">
+    <div class="popup-header">
+      <h3>📍 Reitti tapahtumapaikalle</h3>
+      <button class="popup-close" onclick="closePopup('popup-fi')">✕</button>
+    </div>
+    <div class="popup-body">
+      <iframe class="popup-map"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1000!2d23.1241!3d63.8367!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x465f7a9f5a5a5a5a%3A0x0!2sPuutarhakatu+2%2C+67100+Kokkola!5e0!3m2!1sfi!2sfi!4v1"
+        allowfullscreen="" loading="lazy"></iframe>
+      <div class="popup-route">
+        <h4>🚂 Rautatieasemalta (~10 min kävely)</h4>
+        <ol>
+          <li>Lähde asemalta kohti keskustaa <strong>Rantakadun</strong> suuntaan.</li>
+          <li>Käänny vasemmalle <strong>Pitkänsillankadun</strong> kohdalla.</li>
+          <li>Jatka suoraan <strong>Puutarhakadulle</strong> — Nuorisokeskus Vinge on oikealla puolella.</li>
+        </ol>
+        <a href="https://maps.google.com/?saddr=Kokkola+rautatieasema&daddr=Puutarhakatu+2+Kokkola" target="_blank" class="popup-directions-btn">Avaa Google Mapsissa →</a>
+      </div>
+      <div class="popup-route">
+        <h4>🚌 Linja-autoasemalta (~8 min kävely)</h4>
+        <ol>
+          <li>Lähde asemalta <strong>Torikadun</strong> suuntaan.</li>
+          <li>Käänny vasemmalle <strong>Puutarhakadulle</strong>.</li>
+          <li>Nuorisokeskus Vinge on noin 300 metrin päässä vasemmalla.</li>
+        </ol>
+        <a href="https://maps.google.com/?saddr=Kokkola+linja-autoasema&daddr=Puutarhakatu+2+Kokkola" target="_blank" class="popup-directions-btn">Avaa Google Mapsissa →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Directions popup SV -->
+<div class="popup-overlay" id="popup-sv">
+  <div class="popup-box">
+    <div class="popup-header">
+      <h3>📍 Vägbeskrivning till evenemanget</h3>
+      <button class="popup-close" onclick="closePopup('popup-sv')">✕</button>
+    </div>
+    <div class="popup-body">
+      <iframe class="popup-map"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1000!2d23.1241!3d63.8367!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x465f7a9f5a5a5a5a%3A0x0!2sPuutarhakatu+2%2C+67100+Kokkola!5e0!3m2!1ssv!2sfi!4v1"
+        allowfullscreen="" loading="lazy"></iframe>
+      <div class="popup-route">
+        <h4>🚂 Från järnvägsstationen (~10 min promenad)</h4>
+        <ol>
+          <li>Gå från stationen mot centrum längs <strong>Strandgatan</strong>.</li>
+          <li>Sväng vänster vid <strong>Långbrogatan</strong>.</li>
+          <li>Fortsätt rakt fram till <strong>Trädgårdsgatan</strong> — Ungdomscenter Vinge ligger till höger.</li>
+        </ol>
+        <a href="https://maps.google.com/?saddr=Karleby+järnvägsstation&daddr=Trädgårdsgatan+2+Karleby" target="_blank" class="popup-directions-btn">Öppna i Google Maps →</a>
+      </div>
+      <div class="popup-route">
+        <h4>🚌 Från busstationen (~8 min promenad)</h4>
+        <ol>
+          <li>Gå från stationen mot <strong>Torggatan</strong>.</li>
+          <li>Sväng vänster till <strong>Trädgårdsgatan</strong>.</li>
+          <li>Ungdomscenter Vinge ligger ca 300 meter bort till vänster.</li>
+        </ol>
+        <a href="https://maps.google.com/?saddr=Karleby+busstation&daddr=Trädgårdsgatan+2+Karleby" target="_blank" class="popup-directions-btn">Öppna i Google Maps →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Directions popup EN -->
+<div class="popup-overlay" id="popup-en">
+  <div class="popup-box">
+    <div class="popup-header">
+      <h3>📍 Directions to the Venue</h3>
+      <button class="popup-close" onclick="closePopup('popup-en')">✕</button>
+    </div>
+    <div class="popup-body">
+      <iframe class="popup-map"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1000!2d23.1241!3d63.8367!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x465f7a9f5a5a5a5a%3A0x0!2sPuutarhakatu+2%2C+67100+Kokkola!5e0!3m2!1sen!2sfi!4v1"
+        allowfullscreen="" loading="lazy"></iframe>
+      <div class="popup-route">
+        <h4>🚂 From the Railway Station (~10 min walk)</h4>
+        <ol>
+          <li>Head from the station towards the city centre along <strong>Rantakatu</strong>.</li>
+          <li>Turn left at <strong>Pitkänsillankatu</strong>.</li>
+          <li>Continue straight to <strong>Puutarhakatu</strong> — Youth Center Vinge is on the right.</li>
+        </ol>
+        <a href="https://maps.google.com/?saddr=Kokkola+railway+station&daddr=Puutarhakatu+2+Kokkola" target="_blank" class="popup-directions-btn">Open in Google Maps →</a>
+      </div>
+      <div class="popup-route">
+        <h4>🚌 From the Bus Station (~8 min walk)</h4>
+        <ol>
+          <li>Head from the station towards <strong>Torikatu</strong>.</li>
+          <li>Turn left onto <strong>Puutarhakatu</strong>.</li>
+          <li>Youth Center Vinge is about 300 metres ahead on the left.</li>
+        </ol>
+        <a href="https://maps.google.com/?saddr=Kokkola+bus+station&daddr=Puutarhakatu+2+Kokkola" target="_blank" class="popup-directions-btn">Open in Google Maps →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function openPopup(id) { document.getElementById(id).classList.add('open'); document.body.style.overflow = 'hidden'; }
+function closePopup(id) { document.getElementById(id).classList.remove('open'); document.body.style.overflow = ''; }
+document.addEventListener('click', e => { if (e.target.classList.contains('popup-overlay')) closePopup(e.target.id); });
+
+const MINIMANI_CARD = `
+<a href="https://www.minimani.fi/" target="_blank" class="partner-card">
+  <div class="partner-logo-wrap">
+    <img src="https://www.minimani.fi/skin/frontend/minimani/default/images/logo.png"
+         alt="Minimani"
+         onerror="this.style.display='none';this.parentNode.innerHTML='<span class=\\'partner-emoji\\'>🛍️</span>'">
+  </div>
+  <div class="partner-info">
+    <div class="partner-name">Minimani</div>
+    <div class="partner-desc">minimani.fi</div>
+    <span class="partner-badge">Yhteistyökumppani</span>
+  </div>
+</a>`;
+
+const KPO_CARD = `
+<a href="https://www.kpo.fi/" target="_blank" class="partner-card">
+  <div class="partner-logo-wrap">
+    <img src="https://www.kpo.fi/globalassets/kpo_logo.png"
+         alt="KPO"
+         onerror="this.style.display='none';this.parentNode.innerHTML='<span class=\\'partner-emoji\\'>🛒</span>'">
+  </div>
+  <div class="partner-info">
+    <div class="partner-name">KPO</div>
+    <div class="partner-desc">kpo.fi</div>
+    <span class="partner-badge">Yhteistyökumppani</span>
+  </div>
+</a>`;
+
+const TORSO_CARD = `
+<a href="https://www.instagram.com/torso_vintage/" target="_blank" class="partner-card">
+  <div class="partner-logo-wrap">
+    <img src="https://www.torso.fi/wp-content/uploads/2022/08/torso-logo.png"
+         alt="Torso Vintage"
+         onerror="this.style.display='none';this.parentNode.innerHTML='<span class=\\'partner-emoji\\'>👕</span>'">
+  </div>
+  <div class="partner-info">
+    <div class="partner-name">Torso Vintage</div>
+    <div class="partner-desc">@torso_vintage</div>
+    <span class="partner-badge">Yhteistyökumppani</span>
+  </div>
+</a>`;
+
+const NUORISOPALVELUT_CARD = `
+<a href="https://www.kokkola.fi/palvelut/nuorisopalvelut/" target="_blank" class="partner-card">
+  <div class="partner-logo-wrap">
+    <img src="https://www.kokkola.fi/tyyli/kuvat/kokkola-logo.png"
+         alt="Kokkolan kaupunki"
+         onerror="this.style.display='none';this.parentNode.innerHTML='<span class=\\'partner-emoji\\'>🏛️</span>'">
+  </div>
+  <div class="partner-info">
+    <div class="partner-name">Kokkolan Nuorisopalvelut</div>
+    <div class="partner-desc">kokkola.fi/nuorisopalvelut</div>
+    <span class="partner-badge">Yhteistyökumppani</span>
+  </div>
+</a>`;
+
+const NUORISOPALVELUT_CARD_SV = `
+<a href="https://www.kokkola.fi/palvelut/nuorisopalvelut/" target="_blank" class="partner-card">
+  <div class="partner-logo-wrap">
+    <img src="https://www.kokkola.fi/tyyli/kuvat/kokkola-logo.png"
+         alt="Karleby stad"
+         onerror="this.style.display='none';this.parentNode.innerHTML='<span class=\\'partner-emoji\\'>🏛️</span>'">
+  </div>
+  <div class="partner-info">
+    <div class="partner-name">Karleby Ungdomstjänster</div>
+    <div class="partner-desc">kokkola.fi/nuorisopalvelut</div>
+    <span class="partner-badge">Samarbetspartner</span>
+  </div>
+</a>`;
+
+const NUORISOPALVELUT_CARD_EN = `
+<a href="https://www.kokkola.fi/palvelut/nuorisopalvelut/" target="_blank" class="partner-card">
+  <div class="partner-logo-wrap">
+    <img src="https://www.kokkola.fi/tyyli/kuvat/kokkola-logo.png"
+         alt="City of Kokkola"
+         onerror="this.style.display='none';this.parentNode.innerHTML='<span class=\\'partner-emoji\\'>🏛️</span>'">
+  </div>
+  <div class="partner-info">
+    <div class="partner-name">Kokkola Youth Services</div>
+    <div class="partner-desc">kokkola.fi/nuorisopalvelut</div>
+    <span class="partner-badge">Partner</span>
+  </div>
+</a>`;
+
+const SUOMALAINEN_CARD = `
+<a href="https://www.suomalainen.com/" target="_blank" class="partner-card">
+  <div class="partner-logo-wrap">
+    <img src="https://www.suomalainen.com/images/logo/suomalainen-kirjakauppa-logo.svg"
+         alt="Suomalainen Kirjakauppa"
+         onerror="this.style.display='none';this.parentNode.innerHTML='<span class=\\'partner-emoji\\'>📚</span>'">
+  </div>
+  <div class="partner-info">
+    <div class="partner-name">Suomalainen Kirjakauppa</div>
+    <div class="partner-desc">suomalainen.com</div>
+    <span class="partner-badge">Yhteistyökumppani</span>
+  </div>
+</a>`;
+
+const SUOMALAINEN_CARD_SV = `
+<a href="https://www.suomalainen.com/" target="_blank" class="partner-card">
+  <div class="partner-logo-wrap">
+    <img src="https://www.suomalainen.com/images/logo/suomalainen-kirjakauppa-logo.svg"
+         alt="Suomalainen Kirjakauppa"
+         onerror="this.style.display='none';this.parentNode.innerHTML='<span class=\\'partner-emoji\\'>📚</span>'">
+  </div>
+  <div class="partner-info">
+    <div class="partner-name">Suomalainen Kirjakauppa</div>
+    <div class="partner-desc">suomalainen.com</div>
+    <span class="partner-badge">Samarbetspartner</span>
+  </div>
+</a>`;
+
+const SUOMALAINEN_CARD_EN = `
+<a href="https://www.suomalainen.com/" target="_blank" class="partner-card">
+  <div class="partner-logo-wrap">
+    <img src="https://www.suomalainen.com/images/logo/suomalainen-kirjakauppa-logo.svg"
+         alt="Suomalainen Kirjakauppa"
+         onerror="this.style.display='none';this.parentNode.innerHTML='<span class=\\'partner-emoji\\'>📚</span>'">
+  </div>
+  <div class="partner-info">
+    <div class="partner-name">Suomalainen Kirjakauppa</div>
+    <div class="partner-desc">suomalainen.com</div>
+    <span class="partner-badge">Partner</span>
+  </div>
+</a>`;
+
+const MINIMANI_CARD_SV = `
+<a href="https://www.minimani.fi/" target="_blank" class="partner-card">
+  <div class="partner-logo-wrap">
+    <img src="https://www.minimani.fi/skin/frontend/minimani/default/images/logo.png"
+         alt="Minimani"
+         onerror="this.style.display='none';this.parentNode.innerHTML='<span class=\\'partner-emoji\\'>🛍️</span>'">
+  </div>
+  <div class="partner-info">
+    <div class="partner-name">Minimani</div>
+    <div class="partner-desc">minimani.fi</div>
+    <span class="partner-badge">Samarbetspartner</span>
+  </div>
+</a>`;
+
+const KPO_CARD_SV = `
+<a href="https://www.kpo.fi/" target="_blank" class="partner-card">
+  <div class="partner-logo-wrap">
+    <img src="https://www.kpo.fi/globalassets/kpo_logo.png"
+         alt="KPO"
+         onerror="this.style.display='none';this.parentNode.innerHTML='<span class=\\'partner-emoji\\'>🛒</span>'">
+  </div>
+  <div class="partner-info">
+    <div class="partner-name">KPO</div>
+    <div class="partner-desc">kpo.fi</div>
+    <span class="partner-badge">Samarbetspartner</span>
+  </div>
+</a>`;
+
+const TORSO_CARD_SV = `
+<a href="https://www.instagram.com/torso_vintage/" target="_blank" class="partner-card">
+  <div class="partner-logo-wrap">
+    <img src="https://www.torso.fi/wp-content/uploads/2022/08/torso-logo.png"
+         alt="Torso Vintage"
+         onerror="this.style.display='none';this.parentNode.innerHTML='<span class=\\'partner-emoji\\'>👕</span>'">
+  </div>
+  <div class="partner-info">
+    <div class="partner-name">Torso Vintage</div>
+    <div class="partner-desc">@torso_vintage</div>
+    <span class="partner-badge">Samarbetspartner</span>
+  </div>
+</a>`;
+
+const MINIMANI_CARD_EN = `
+<a href="https://www.minimani.fi/" target="_blank" class="partner-card">
+  <div class="partner-logo-wrap">
+    <img src="https://www.minimani.fi/skin/frontend/minimani/default/images/logo.png"
+         alt="Minimani"
+         onerror="this.style.display='none';this.parentNode.innerHTML='<span class=\\'partner-emoji\\'>🛍️</span>'">
+  </div>
+  <div class="partner-info">
+    <div class="partner-name">Minimani</div>
+    <div class="partner-desc">minimani.fi</div>
+    <span class="partner-badge">Partner</span>
+  </div>
+</a>`;
+
+const KPO_CARD_EN = `
+<a href="https://www.kpo.fi/" target="_blank" class="partner-card">
+  <div class="partner-logo-wrap">
+    <img src="https://www.kpo.fi/globalassets/kpo_logo.png"
+         alt="KPO"
+         onerror="this.style.display='none';this.parentNode.innerHTML='<span class=\\'partner-emoji\\'>🛒</span>'">
+  </div>
+  <div class="partner-info">
+    <div class="partner-name">KPO</div>
+    <div class="partner-desc">kpo.fi</div>
+    <span class="partner-badge">Partner</span>
+  </div>
+</a>`;
+
+const TORSO_CARD_EN = `
+<a href="https://www.instagram.com/torso_vintage/" target="_blank" class="partner-card">
+  <div class="partner-logo-wrap">
+    <img src="https://www.torso.fi/wp-content/uploads/2022/08/torso-logo.png"
+         alt="Torso Vintage"
+         onerror="this.style.display='none';this.parentNode.innerHTML='<span class=\\'partner-emoji\\'>👕</span>'">
+  </div>
+  <div class="partner-info">
+    <div class="partner-name">Torso Vintage</div>
+    <div class="partner-desc">@torso_vintage</div>
+    <span class="partner-badge">Partner</span>
+  </div>
+</a>`;
+
+const CONTACT_FORM_FI = `
+<div class="contact-form-wrap">
+  <h3>Lähetä meille viesti</h3>
+  <form action="https://formspree.io/f/xyklvwqp" method="post">
+    <div class="form_settings">
+      <p><span>Nimesi</span><input class="contact" type="text" name="your_name" value="" /></p>
+      <p><span>Sähköposti</span><input class="contact" type="text" name="your_email" value="" /></p>
+      <p><span>Viestisi</span><textarea class="contact textarea" rows="8" cols="50" name="your_enquiry"></textarea></p>
+      <p style="padding-top:15px"><span>&nbsp;</span><input class="submit" type="submit" name="contact_submitted" value="Lähetä" /></p>
+    </div>
+  </form>
+</div>`;
+
+const CONTACT_FORM_SV = `
+<div class="contact-form-wrap">
+  <h3>Skicka oss ett meddelande</h3>
+  <form action="https://formspree.io/f/xyklvwqp" method="post">
+    <div class="form_settings">
+      <p><span>Ditt namn</span><input class="contact" type="text" name="your_name" value="" /></p>
+      <p><span>E-post</span><input class="contact" type="text" name="your_email" value="" /></p>
+      <p><span>Ditt meddelande</span><textarea class="contact textarea" rows="8" cols="50" name="your_enquiry"></textarea></p>
+      <p style="padding-top:15px"><span>&nbsp;</span><input class="submit" type="submit" name="contact_submitted" value="Skicka" /></p>
+    </div>
+  </form>
+</div>`;
+
+const CONTACT_FORM_EN = `
+<div class="contact-form-wrap">
+  <h3>Send us a message</h3>
+  <form action="https://formspree.io/f/xyklvwqp" method="post">
+    <div class="form_settings">
+      <p><span>Your Name</span><input class="contact" type="text" name="your_name" value="" /></p>
+      <p><span>Email</span><input class="contact" type="text" name="your_email" value="" /></p>
+      <p><span>Your Message</span><textarea class="contact textarea" rows="8" cols="50" name="your_enquiry"></textarea></p>
+      <p style="padding-top:15px"><span>&nbsp;</span><input class="submit" type="submit" name="contact_submitted" value="Send" /></p>
+    </div>
+  </form>
+</div>`;
+
+const IG_ICON = `<svg class="social-logo" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>`;
+const FB_ICON = `<svg class="social-logo" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>`;
+const TT_ICON = `<svg class="social-logo" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>`;
+
+const T = {
+  fi: {
+    tagline: 'Lautapelitapahtuma',
+    nav: { home: 'Etusivu', info: 'Tietoa', program: 'Ohjelma', games: 'Pelit', partners: 'Yhteistyökumppanit', social: 'Seuraa', contact: 'Yhteystiedot' },
+    pages: {
+      home: `
+        <div class="hero">
+          <img src="logo.png" alt="BGK Logo" class="hero-logo">
+          <h1>BoardGames<span class="red">Kokkola</span></h1>
+          <div class="hero-sub">– Lautapelitapahtuma –</div>
+          <div class="hero-date">26.–27.9.2026</div>
+          <div class="hero-date-sub">Avoinna koko viikonlopun</div>
+          <div class="hero-free-badge">Vapaa pääsy kaiken ikäisille</div>
+          <div class="hero-divider"></div>
+          <div class="features-grid">
+            <div class="feature-pill"><span>MTG-Turnaus</span></div>
+            <div class="feature-pill"><span>Roolipelejä</span></div>
+            <div class="feature-pill"><span>Retropelejä</span></div>
+            <div class="feature-pill"><span>Figuuripelejä</span></div><br>
+            <div class="feature-pill"><span>Kilpailuja</span></div>
+            <div class="feature-pill"><span>Pelikirppis</span></div>
+            <div class="feature-pill"><span>Lastenohjelmaa</span></div>
+
+          </div>
+          <div class="venue-box">📍 Nuorisokeskus Vinge, Puutarhakatu 2</div>
+        </div>`,
+
+      info: `
+        <div class="page-header"><h2>Tietoa <em>tapahtumasta</em></h2></div>
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-icon">🎲</div>
+            <h3>Mikä on BGK?</h3>
+            <p>BoardGamesKokkola on Kokkolan lautapeliharrastajien yhteisprojekti, jonka tavoitteena on tarjota Kokkolan ja lähialueen asukkaille mahdollisuus kokoontua yhteen, tutustua uusiin peleihin sekä tarjota tilaisuus löytää alueen harrastusmahdollisuuksia.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon">📅</div>
+            <h3>Ajankohta</h3>
+            <p>Tapahtuma järjestetään <strong style="color:var(--gold-light)">26.–27. syyskuuta 2026</strong>. Molempina päivinä avoinna koko päivän.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon">📍</div>
+            <h3>Paikka</h3>
+            <p>Nuorisokeskus Vinge<br>Puutarhakatu 2<br>Kokkola</p>
+            <button class="venue-link-btn" onclick="openPopup('popup-fi')">🗺️ Reittiohjeet asemilta →</button>
+          </div>
+          <div class="card">
+            <div class="card-icon">🎟️</div>
+            <h3>Pääsymaksu</h3>
+            <p>Tapahtuma on <strong style="color:var(--gold-light)">ilmainen</strong>. Tapahtumassa on mahdollisuus ostaa pientä purtavaa ja kahvituotteita.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon">👨‍👩‍👧‍👦</div>
+            <h3>Kenelle?</h3>
+            <p>Tapahtuma on kaiken ikäisille. Lauantaina järjestetään <strong style="color:var(--gold-light)">Lapsiparkki</strong>, johon voit tuoda lapsesi hoitoon ja keskittyä itse pelaamiseen. Lapsiparkin lapsilla on myös mahdollisuus pelata heille sopivia lastenpelejä.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon">🏛️</div>
+            <h3>Tapahtuman organisointi</h3>
+            <p><a href="https://www.facebook.com/groups/1796888850562408/" target="_blank" style="color:var(--gold-light);text-decoration:underline;">Kokkolan Lautapelikerho</a></p>
+          </div>
+        </div>
+
+        <div class="page-header" style="margin-top:2.5rem"><h2>Tapahtumapaikan <em>säännöt</em></h2></div>
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-icon">🚫</div>
+            <h3>Päihteettömyys</h3>
+            <p>Tapahtuma on täysin <strong style="color:var(--gold-light)">päihteetön</strong>. Alkoholin ja huumausaineiden hallussapito ja nauttiminen tapahtuma-alueella ja sen välittömässä läheisyydessä on kiellettyä. Päihtyneenä esiintyminen alueella on kiellettyä — varaamme oikeuden poistaa päihtyneet henkilöt tai estää heidän pääsynsä alueelle.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon">🚬</div>
+            <h3>Tupakointi</h3>
+            <p>Alueella ei ole tupakointipaikkaa. Pidäthän huolta, ettet polta tupakkaa tapahtuma-alueella, ja siivoat jälkesi. Ethän tuo alueelle myöskään muita epäilyttäviä tuotteita.</p>
+          </div>
+        </div>
+
+        <div class="page-header" style="margin-top:2.5rem"><h2>Peli<em>etiketti</em></h2></div>
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-icon">🎲</div>
+            <h3>Pelien käsittely</h3>
+            <p>Käsittelemme pelejä hyvin — emme esimerkiksi taittele tai käsittele kortteja rajusti, koske pelitarvikkeisiin likaisin käsin tai muulla tavoin vahingoita pelejä. Jos rikot pelin tai se vahingoittuu sinun toimestasi, olet velvollinen korvaamaan sen pelin omistajalle.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon">♻️</div>
+            <h3>Siisteys & palautus</h3>
+            <p>Siivoamme pelit ja palautamme ne sekä muut pelitarvikkeet takaisin pelipisteelle. Tarkistamme ennen palautusta, ettei lattialle ole jäänyt peliin kuuluvia tarvikkeita.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon">🤝</div>
+            <h3>Turvallisen tilan periaatteet</h3>
+            <p>Emme hyväksy syrjintää, häirintää, kiusaamista, rasismia, seksismiä ja väkivaltaa missään muodossa. Jos todistamme häirintää, syrjintää, kiusaamista, rasismia tai muuta epäasiallista kohtelua, emme jää sivustakatsojaksi vaan puutumme siihen välittömästi. Ilmoitamme asiasta mahdollisimman pian kertomalla asiasta kasvotusten toiminnan vetäjälle, laittamalla sähköpostia BoardGamesKokkola – pelitapahtumalle (boardgamekokkola@gmail.com).</p>
+          </div>
+        </div>
+
+        <div class="page-header" style="margin-top:2.5rem"><h2>Muita <em>huomioita</em></h2></div>
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-icon">📷</div>
+            <h3>Valokuvaus</h3>
+            <p>Tapahtumassa on valokuvaajia, jotka ottavat kuvia tapahtuman käyttöön sekä suoraan sosiaaliseen mediaamme. Ole yhteydessä kuvaajaan, jos et toivo näkyväsi valokuvassa.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon">📸</div>
+            <h3>Omat kuvat</h3>
+            <p>Voit myös itse ottaa valokuvia tapahtumasta ja jakaa niitä Instagramissa. Käytä tägiämme <strong style="color:var(--gold-light)">#bgk_kokkola</strong>. Kunnioitathan tällöin muiden toiveita valokuvaan päätymisestä.</p>
+          </div>
+        </div>`,
+
+      program: `
+        <div class="page-header"><h2>Ohjelma & <em>Aikataulu</em></h2></div>
+        <table class="schedule-table">
+          <thead><tr><th>Aika</th><th>Tapahtuma</th><th>Paikka</th></tr></thead>
+          <tbody>
+			<h3>Tapahtuman ohjelma on alustava. Ohjelmiin saattaa tulla muutoksia lähempänä syyskuuta. </h3>
+            <tr class="day-header"><td colspan="3">Lauantai 26.9.2026 · Klo 10–23</td></tr>
+            <tr><td>10:00–11:00</td><td>Vapaa-aika</td><td>–</td></tr>
+            <tr><td>11:00–15:00</td><td>Jukka Taipale roolipelit</td><td>Rokkikoulu</td></tr>
+            <tr><td>12:00–16:00</td><td>Lapsiparkki</td><td>Lasikoppi</td></tr>
+            <tr><td>21:00–23:00</td><td>Vapaata pelailua – ei enää aloiteta ohjelmanumeroita</td><td>–</td></tr>
+            <tr><td>23:00</td><td>Porukka pihalle</td><td>–</td></tr>
+            <tr class="day-header"><td colspan="3">Sunnuntai 27.9.2026 · Klo 9–23</td></tr>
+            <tr><td>11:00–15:00</td><td>Jukka Taipale roolipelit</td><td>Rokkikoulu</td></tr>
+            <tr><td>12:30–16:00</td><td>MTG cube draft 8–12 osallistujaa</td><td>Lavalla</td></tr>
+            <tr><td>16:30</td><td>Judges tower MTG</td><td>Lavalla</td></tr>
+            <tr><td>21:00–23:00</td><td>Vapaata pelailua – ei enää aloiteta ohjelmanumeroita</td><td>–</td></tr>
+            <tr><td>23:00</td><td>Porukka pihalle</td><td>–</td></tr>
+          </tbody>
+        </table>`,
+
+      games: `
+        <div class="page-header"><h2>Pelit & <em>Aktiviteetit</em></h2></div>
+        <div class="card-grid">
+          <div class="card"><div class="card-icon">🏆</div><h3>Kilpailut</h3><p>Useita lautapelikilpailuja kaiken tasoisille pelaajille. </p></div>
+          <div class="card"><div class="card-icon">🃏</div><h3>MTG-Turnaus</h3><p>Magic: The Gathering – cube draft (8–12 osallistujaa) sekä Judges tower MTG.</p></div>
+          <div class="card"><div class="card-icon">🎭</div><h3>Roolipelit</h3><p>Jukka Taipale vetää roolipelejä molempina päivinä Rokkikoulussa klo 11–15.</p></div>
+          <div class="card"><div class="card-icon">🛒</div><h3>Pelikirppis</h3><p>Osta, myy ja vaihda käytettyjä lautapelejä. Tuo omat ylimääräiset pelisi myyntiin!</p></div>
+          <div class="card"><div class="card-icon">👶</div><h3>Lapsiparkki</h3><p>Lauantaina klo 12–16 Lasikopin tiloissa – vanhemmat voivat pelata rauhassa!</p></div>
+          <div class="card"><div class="card-icon">🎲</div><h3>Avoin Pelisali</h3><p>Tarjolla laaja, jopa 150 lautapelin kokoelma pelattavaksi. Voit myös tuoda omia pelejä pelattavaksi paikanpäälle.</p></div>
+        </div>`,
+
+      partners: `
+        <div class="page-header"><h2>Yhteistyö<em>kumppanit</em></h2></div>
+        <p class="partners-intro">BoardGamesKokkola on mahdollinen yhteistyökumppaneiden tuella. Lämpimät kiitokset kaikille, jotka tekevät tämän tapahtuman mahdolliseksi!</p>
+        <div class="partners-tier">
+          <div class="partners-tier-title">Yhteistyökumppanit</div>
+          <div class="partners-grid">
+            ${MINIMANI_CARD}
+            ${KPO_CARD}
+            ${TORSO_CARD}
+            ${NUORISOPALVELUT_CARD}
+            ${SUOMALAINEN_CARD}
+          </div>
+        </div>
+        <div class="become-partner">
+          <div class="become-partner-text">
+            <h3>Tule yhteistyökumppaniksi!</h3>
+            <p>Haluatko näkyvyyttä BoardGamesKokkola 2026 -tapahtumassa? Otamme mielellämme vastaan uusia yhteistyökumppaneita. Ota yhteyttä ja kerrotaan lisää mahdollisuuksista!</p>
+          </div>
+          <a href="mailto:boardgamekokkola@gmail.com" class="become-partner-btn">Ota yhteyttä →</a>
+        </div>`,
+
+      social: `
+        <div class="page-header"><h2>Seuraa <em>meitä</em></h2></div>
+        <div class="instagram-section">
+          <p class="insta-handle">@kokkolabgk</p>
+          <div class="insta-embed-wrapper">
+            <div class="elfsight-app-9b1b3317-5019-4fb5-8c58-4e40b5bc20a9" data-elfsight-app-lazy></div>
+          </div>
+          <div class="social-bar">
+            <a href="https://www.instagram.com/kokkolabgk" target="_blank" class="social-btn instagram">${IG_ICON} Instagram</a>
+            <a href="https://www.facebook.com/BoardGamesKokkola/" target="_blank" class="social-btn facebook">${FB_ICON} Facebook</a>
+            <a href="https://www.tiktok.com/@boardgameskokkola" target="_blank" class="social-btn tiktok">${TT_ICON} TikTok</a>
+          </div>
+        </div>`,
+
+      contact: `
+        <div class="page-header"><h2>Yhteystiedot & <em>Paikka</em></h2></div>
+        <div class="contact-grid">
+          <div class="contact-card"><span class="cc-icon">📍</span><h3>Osoite</h3><p>Nuorisokeskus Vinge<br>Puutarhakatu 2<br>67100 Kokkola</p></div>
+          <div class="contact-card"><span class="cc-icon">📧</span><h3>Sähköposti</h3><a href="mailto:boardgamekokkola@gmail.com">boardgamekokkola@gmail.com</a></div>
+          <div class="contact-card">${IG_ICON}<h3>Instagram</h3><a href="https://www.instagram.com/kokkolabgk" target="_blank">@kokkolabgk</a></div>
+          <div class="contact-card">${FB_ICON}<h3>Facebook</h3><a href="https://www.facebook.com/BoardGamesKokkola/" target="_blank">BoardGamesKokkola</a></div>
+          <div class="contact-card">${TT_ICON}<h3>TikTok</h3><a href="https://www.tiktok.com/@boardgameskokkola" target="_blank">@boardgameskokkola</a></div>
+        </div>
+        <div class="map-container">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1834.3!2d23.1241!3d63.8367!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x465f7b1a8b1a8b1a%3A0x0!2sPuutarhakatu+2%2C+Kokkola!5e0!3m2!1sfi!2sfi!4v1" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+        ${CONTACT_FORM_FI}`,
+    }
+  },
+
+  sv: {
+    tagline: 'Brädspelsevent',
+    nav: { home: 'Hem', info: 'Info', program: 'Program', games: 'Spel', partners: 'Samarbetspartners', social: 'Följ oss', contact: 'Kontakt' },
+    pages: {
+      home: `
+        <div class="hero">
+          <img src="logo.png" alt="BGK Logo" class="hero-logo">
+          <h1>BoardGames<span class="red">Kokkola</span></h1>
+          <div class="hero-sub">– Brädspelsevent –</div>
+          <div class="hero-date">26.–27.9.2026</div>
+          <div class="hero-date-sub">Öppet hela helgen</div>
+          <div class="hero-free-badge">För alla åldrar</div>
+          <div class="hero-divider"></div>
+          <div class="features-grid">
+            <div class="feature-pill"><span>MTG-Turnering</span></div>
+            <div class="feature-pill"><span>Rollspel</span></div>
+            <div class="feature-pill"><span>Retrospel</span></div>
+            <div class="feature-pill"><span>Figurspel</span></div><br>
+            <div class="feature-pill"><span>Tävlingar</span></div>
+            <div class="feature-pill"><span>Spelmarknad</span></div>
+            <div class="feature-pill"><span>Barnprogram</span></div>
+          </div>
+          <div class="venue-box">📍 Ungdomscenter Vinge, Trädgårdsgatan 2</div>
+        </div>`,
+
+      info: `
+        <div class="page-header"><h2>Om <em>eventet</em></h2></div>
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-icon">🎲</div>
+            <h3>Vad är BGK?</h3>
+            <p>BoardGamesKokkola är ett gemensamt projekt av brädspelsentusiaster i Karleby. Målet är att ge spelare i Karleby och närområdet möjlighet att samlas, bekanta sig med nya spel och ge stadens invånare en chans att upptäcka lokala hobbyaktiviteter.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon">📅</div>
+            <h3>Datum</h3>
+            <p>Eventet ordnas <strong style="color:var(--gold-light)">26–27 september 2026</strong>. Öppet hela dagen båda dagarna.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon">📍</div>
+            <h3>Plats</h3>
+            <p>Ungdomscenter Vinge<br>Trädgårdsgatan 2<br>Karleby</p>
+            <button class="venue-link-btn" onclick="openPopup('popup-sv')">🗺️ Vägbeskrivning från stationerna →</button>
+          </div>
+          <div class="card">
+            <div class="card-icon">🎟️</div>
+            <h3>Inträde</h3>
+            <p>Eventet är <strong style="color:var(--gold-light)">gratis</strong>. Det finns möjlighet att köpa småtugg och kaffe på plats.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon">👨‍👩‍👧‍👦</div>
+            <h3>För vem?</h3>
+            <p>Eventet är öppet för alla åldrar. På lördagen ordnas en <strong style="color:var(--gold-light)">barnparkering</strong> där du kan lämna ditt barn och fokusera på spelandet själv. Barnen i parkeringen har också möjlighet att spela lämpliga barnspel.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon">🏛️</div>
+            <h3>Eventets organisation</h3>
+            <p><a href="https://www.facebook.com/groups/1796888850562408/" target="_blank" style="color:var(--gold-light);text-decoration:underline;">Kokkolan Lautapelikerho</a></p>
+          </div>
+        </div>
+
+        <div class="page-header" style="margin-top:2.5rem"><h2>Eventområdets <em>regler</em></h2></div>
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-icon">🚫</div>
+            <h3>Drogfritt</h3>
+            <p>Eventet är helt <strong style="color:var(--gold-light)">drogfritt</strong>. Innehav och konsumtion av alkohol och narkotika på eller i omedelbar närhet av eventområdet är förbjudet. Det är förbjudet att uppträda berusad — vi förbehåller oss rätten att avvisa berusade personer eller förhindra deras tillträde.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon">🚬</div>
+            <h3>Rökning</h3>
+            <p>Det finns ingen rökplats på området. Se till att du inte röker på eventområdet och städar efter dig. Ta inte heller med andra misstänkta produkter till området.</p>
+          </div>
+        </div>
+
+<div class="page-header" style="margin-top:2.5rem"><h2>Spel<em>etikett</em></h2></div>
+<div class="card-grid">
+  <div class="card">
+    <div class="card-icon">🎲</div>
+    <h3>Hantering av spel</h3>
+    <p>Hantera spelen varsamt — vik inte kort, rör inte spelkomponenter med smutsiga händer och skada inte spelen på annat sätt. Om du förstör eller skadar ett spel är du skyldig att ersätta det till spelets ägare.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-icon">♻️</div>
+    <h3>Städning & återlämning</h3>
+    <p>Städa spelen och återlämna dem samt övriga spelkomponenter till spelstationen. Kontrollera innan återlämning att inga komponenter har fallit på golvet.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-icon">🤝</div>
+    <h3>Principerna för trygg plats</h3>
+    <p>Diskriminering, trakasserier, mobbning, rasism, sexism eller våld i någon form accepteras inte. Om du bevittnar trakasserier, diskriminering, mobbning, rasism eller annat olämpligt beteende, förbli inte passiv — ingrip omedelbart.
+
+Anmäl situationen så snart som möjligt genom att tala direkt med en eventorganisatör eller genom att skicka e-post till BoardGamesKokkola (boardgamekokkola@gmail.com).</p>
+  </div>
+</div>
+
+        <div class="page-header" style="margin-top:2.5rem"><h2>Övriga <em>noteringar</em></h2></div>
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-icon">📷</div>
+            <h3>Fotografering</h3>
+            <p>På eventet finns fotografer som tar bilder för eventets bruk och direkt till våra sociala medier. Kontakta fotografen om du inte vill synas på bild.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon">📸</div>
+            <h3>Egna bilder</h3>
+            <p>Du kan också ta egna bilder från eventet och dela dem på Instagram — använd vår tagg <strong style="color:var(--gold-light)">#bgk_kokkola</strong>. Tänk då på att inte fotografera någon som inte vill synas, och respektera andra när du fotograferar.</p>
+          </div>
+        </div>`,
+
+      program: `
+        <div class="page-header"><h2>Program & <em>Schema</em></h2></div>
+        <table class="schedule-table">
+          <thead><tr><th>Tid</th><th>Aktivitet</th><th>Plats</th></tr></thead>
+          <tbody>
+			<h3>Programmet är preliminärt. Ändringar kan förekomma närmre september.</h3>
+            <tr class="day-header"><td colspan="3">Lördag 26.9.2026 · Kl. 10–23</td></tr>
+            <tr><td>10:00–11:00</td><td>Fri tid</td><td>–</td></tr>
+            <tr><td>11:00–15:00</td><td>Jukka Taipale rollspel (Rokkikoulu)</td><td>Rokkikoulu</td></tr>
+            <tr><td>12:00–16:00</td><td>Barnparkering</td><td>Lasikoppi</td></tr>
+            <tr><td>21:00–23:00</td><td>Fritt spelande – inga nya programnummer startas</td><td>–</td></tr>
+            <tr><td>23:00</td><td>Alla ut</td><td>–</td></tr>
+            <tr class="day-header"><td colspan="3">Söndag 27.9.2026 · Kl. 9–23</td></tr>
+            <tr><td>11:00–15:00</td><td>Jukka Taipale rollspel (Rokkikoulu)</td><td>Rokkikoulu</td></tr>
+            <tr><td>12:30–16:00</td><td>MTG cube draft 8–12 deltagare</td><td>Scenen</td></tr>
+            <tr><td>16:30</td><td>Judges tower MTG</td><td>Scenen</td></tr>
+            <tr><td>21:00–23:00</td><td>Fritt spelande – inga nya programnummer startas</td><td>–</td></tr>
+            <tr><td>23:00</td><td>Alla ut</td><td>–</td></tr>
+          </tbody>
+        </table>`,
+
+      games: `
+        <div class="page-header"><h2>Spel & <em>Aktiviteter</em></h2></div>
+        <div class="card-grid">
+          <div class="card"><div class="card-icon">🏆</div><h3>Tävlingar</h3><p>Flera brädspelstävlingar för spelare på alla nivåer.</p></div>
+          <div class="card"><div class="card-icon">🃏</div><h3>MTG-Turnering</h3><p>Magic: The Gathering – cube draft för 8–12 deltagare samt Judges tower.</p></div>
+          <div class="card"><div class="card-icon">🎭</div><h3>Rollspel</h3><p>Jukka Taipale leder rollspel båda dagarna på Rokkikoulu kl. 11–15.</p></div>
+          <div class="card"><div class="card-icon">🛒</div><h3>Spelmarknad</h3><p>Köp, sälj och byt begagnade brädspel. Ta med dina egna överskottsspel!</p></div>
+          <div class="card"><div class="card-icon">👶</div><h3>Barnparkering</h3><p>Lördag kl. 12–16 i Lasikoppi – föräldrarna kan spela i lugn och ro!</p></div>
+          <div class="card"><div class="card-icon">🎲</div><h3>Öppen Spelsal</h3><p>Ett brett utbud på upp till 150 brädspel att spela. Du kan också ta med egna spel att spela på plats.</p></div>
+        </div>`,
+
+      partners: `
+        <div class="page-header"><h2>Samarbets<em>partners</em></h2></div>
+        <p class="partners-intro">BoardGamesKokkola är möjligt tack vare våra samarbetspartners. Ett varmt tack till alla som gör detta event möjligt!</p>
+        <div class="partners-tier">
+          <div class="partners-tier-title">🤝 Samarbetspartners</div>
+          <div class="partners-grid">
+            ${MINIMANI_CARD_SV}
+            ${KPO_CARD_SV}
+            ${TORSO_CARD_SV}
+            ${NUORISOPALVELUT_CARD_SV}
+            ${SUOMALAINEN_CARD_SV}
+          </div>
+        </div>
+        <div class="become-partner">
+          <div class="become-partner-text">
+            <h3>Bli samarbetspartner!</h3>
+            <p>Vill du synas på BoardGamesKokkola 2026? Vi välkomnar nya samarbetspartners. Kontakta oss och berätta mer om möjligheterna!</p>
+          </div>
+          <a href="mailto:boardgamekokkola@gmail.com" class="become-partner-btn">Kontakta oss →</a>
+        </div>`,
+
+      social: `
+        <div class="page-header"><h2>Följ <em>oss</em></h2></div>
+        <div class="instagram-section">
+          <p class="insta-handle">@kokkolabgk</p>
+          <div class="insta-embed-wrapper">
+            <div class="elfsight-app-9b1b3317-5019-4fb5-8c58-4e40b5bc20a9" data-elfsight-app-lazy></div>
+          </div>
+          <div class="social-bar">
+            <a href="https://www.instagram.com/kokkolabgk" target="_blank" class="social-btn instagram">${IG_ICON} Instagram</a>
+            <a href="https://www.facebook.com/BoardGamesKokkola/" target="_blank" class="social-btn facebook">${FB_ICON} Facebook</a>
+            <a href="https://www.tiktok.com/@boardgameskokkola" target="_blank" class="social-btn tiktok">${TT_ICON} TikTok</a>
+          </div>
+        </div>`,
+
+      contact: `
+        <div class="page-header"><h2>Kontakt & <em>Plats</em></h2></div>
+        <div class="contact-grid">
+          <div class="contact-card"><span class="cc-icon">📍</span><h3>Adress</h3><p>Ungdomscenter Vinge<br>Trädgårdsgatan 2<br>67100 Karleby</p></div>
+          <div class="contact-card"><span class="cc-icon">📧</span><h3>E-post</h3><a href="mailto:boardgamekokkola@gmail.com">boardgamekokkola@gmail.com</a></div>
+          <div class="contact-card">${IG_ICON}<h3>Instagram</h3><a href="https://www.instagram.com/kokkolabgk" target="_blank">@kokkolabgk</a></div>
+          <div class="contact-card">${FB_ICON}<h3>Facebook</h3><a href="https://www.facebook.com/BoardGamesKokkola/" target="_blank">BoardGamesKokkola</a></div>
+          <div class="contact-card">${TT_ICON}<h3>TikTok</h3><a href="https://www.tiktok.com/@boardgameskokkola" target="_blank">@boardgameskokkola</a></div>
+        </div>
+        <div class="map-container">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1834.3!2d23.1241!3d63.8367!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x465f7b1a8b1a8b1a%3A0x0!2sPuutarhakatu+2%2C+Kokkola!5e0!3m2!1sfi!2sfi!4v1" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+        ${CONTACT_FORM_SV}`,
+    }
+  },
+
+  en: {
+    tagline: 'Board Game Event',
+    nav: { home: 'Home', info: 'Info', program: 'Program', games: 'Games', partners: 'Partners', social: 'Follow Us', contact: 'Contact' },
+    pages: {
+      home: `
+        <div class="hero">
+          <img src="logo.png" alt="BGK Logo" class="hero-logo">
+          <h1>BoardGames<span class="red">Kokkola</span></h1>
+          <div class="hero-sub">– Board Game Event –</div>
+          <div class="hero-date">26–27 Sep 2026</div>
+          <div class="hero-date-sub">Open all weekend</div>
+          <div class="hero-free-badge">Free Entry – No admission fee!</div>
+          <div class="hero-divider"></div>
+          <div class="features-grid">
+            <div class="feature-pill"><span>MTG Tournament</span></div>
+            <div class="feature-pill"><span>Role-playing Games</span></div>
+            <div class="feature-pill"><span>Retro Games</span></div>
+            <div class="feature-pill"><span>Miniature Games</span></div><br>
+            <div class="feature-pill"><span>Competitions</span></div>
+            <div class="feature-pill"><span>Flea market for Games</span></div>
+            <div class="feature-pill"><span>Children's Activities</span></div>
+          </div>
+          <div class="venue-box">📍 Youth Center Vinge, Puutarhakatu 2</div>
+        </div>`,
+
+      info: `
+        <div class="page-header"><h2>About the <em>Event</em></h2></div>
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-icon">🎲</div>
+            <h3>What is BGK?</h3>
+            <p>BoardGamesKokkola is a joint project by board game enthusiasts in Kokkola. Our goal is to give hobbyists in Kokkola and the surrounding area a chance to gather, discover new games, and introduce residents to the local hobby scene.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon">📅</div>
+            <h3>Date</h3>
+            <p>The event takes place <strong style="color:var(--gold-light)">September 26–27, 2026</strong>. Open all day both days.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon">📍</div>
+            <h3>Venue</h3>
+            <p>Youth Center Vinge<br>Puutarhakatu 2<br>Kokkola, Finland</p>
+            <button class="venue-link-btn" onclick="openPopup('popup-en')">🗺️ Directions from the stations →</button>
+          </div>
+          <div class="card">
+            <div class="card-icon">🎟️</div>
+            <h3>Entry Fee</h3>
+            <p>The event is <strong style="color:var(--gold-light)">free of charge</strong>. Small snacks and coffee products will be available for purchase on site.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon">👨‍👩‍👧‍👦</div>
+            <h3>Who is it for?</h3>
+            <p>The event is open to all ages. On Saturday there will be a <strong style="color:var(--gold-light)">children's play area</strong> where you can drop off your child and focus on gaming yourself. Children in the play area can also enjoy age-appropriate board games.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon">🏛️</div>
+            <h3>Event organised by</h3>
+            <p><a href="https://www.facebook.com/groups/1796888850562408/" target="_blank" style="color:var(--gold-light);text-decoration:underline;">Kokkolan Lautapelikerho</a></p>
+          </div>
+        </div>
+
+        <div class="page-header" style="margin-top:2.5rem"><h2>Venue <em>Rules</em></h2></div>
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-icon">🚫</div>
+            <h3>Substance-free</h3>
+            <p>The event is completely <strong style="color:var(--gold-light)">substance-free</strong>. Possession and consumption of alcohol and narcotics on or immediately around the event area is prohibited. Appearing intoxicated is not permitted — we reserve the right to remove intoxicated individuals or deny them entry.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon">🚬</div>
+            <h3>Smoking</h3>
+            <p>There is no designated smoking area on site. Please ensure you do not smoke in the event area and clean up after yourself. Please also refrain from bringing any other questionable products to the event.</p>
+          </div>
+        </div>
+
+        <div class="page-header" style="margin-top:2.5rem"><h2>Game <em>Etiquette</em></h2></div>
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-icon">🎲</div>
+            <h3>Handling games</h3>
+            <p>We handle games with care — we do not bend or roughly handle cards, touch game components with dirty hands, or damage games in any way. If you break or damage a game, you are responsible for compensating the game's owner.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon">♻️</div>
+            <h3>Tidying up & returning</h3>
+            <p>We tidy up games and return them along with all other components to the game station. Before returning a game, check that no pieces have been dropped on the floor.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon">🤝</div>
+            <h3>Safe Space Principles</h3>
+            <p>We do not accept discrimination, harassment, bullying, racism, sexism or violence in any form. If we witness harassment, discrimination, bullying, racism or other inappropriate behaviour, we do not stand by — we intervene immediately.
+We report the matter as soon as possible by speaking directly to an event organiser in person, or by emailing BoardGamesKokkola (boardgamekokkola@gmail.com).</p>
+          </div>
+        </div>
+
+        <div class="page-header" style="margin-top:2.5rem"><h2>Other <em>notes</em></h2></div>
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-icon">📷</div>
+            <h3>Photography</h3>
+            <p>There will be photographers at the event taking photos for event use and our social media. Please contact a photographer if you would prefer not to appear in photos.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon">📸</div>
+            <h3>Your own photos</h3>
+            <p>You are also welcome to take your own photos at the event and share them on Instagram — use our tag <strong style="color:var(--gold-light)">#bgk_kokkola</strong>. Please be mindful not to photograph anyone who does not wish to be pictured, and respect others when taking photos.</p>
+          </div>
+        </div>`,
+
+      program: `
+        <div class="page-header"><h2>Schedule & <em>Program</em></h2></div>
+        <table class="schedule-table">
+          <thead><tr><th>Time</th><th>Activity</th><th>Location</th></tr></thead>
+          <tbody>
+			<h3>The program is preliminary. Changes may occur closer to September.</h3>
+            <tr class="day-header"><td colspan="3">Saturday, September 26, 2026 · 10:00–23:00</td></tr>
+            <tr><td>10:00–11:00</td><td>Free time</td><td>–</td></tr>
+            <tr><td>11:00–15:00</td><td>Jukka Taipale Role-playing Games (Rokkikoulu)</td><td>Rokkikoulu</td></tr>
+            <tr><td>12:00–16:00</td><td>Children's play area</td><td>Lasikoppi</td></tr>
+            <tr><td>21:00–23:00</td><td>Free gaming – no new program items started</td><td>–</td></tr>
+            <tr><td>23:00</td><td>Closing time</td><td>–</td></tr>
+            <tr class="day-header"><td colspan="3">Sunday, September 27, 2026 · 09:00–23:00</td></tr>
+            <tr><td>11:00–15:00</td><td>Jukka Taipale Role-playing Games (Rokkikoulu)</td><td>Rokkikoulu</td></tr>
+            <tr><td>12:30–16:00</td><td>MTG cube draft 8–12 participants</td><td>Stage</td></tr>
+            <tr><td>16:30</td><td>Judges tower MTG</td><td>Stage</td></tr>
+            <tr><td>21:00–23:00</td><td>Free gaming – no new program items started</td><td>–</td></tr>
+            <tr><td>23:00</td><td>Closing time</td><td>–</td></tr>
+          </tbody>
+        </table>`,
+
+      games: `
+        <div class="page-header"><h2>Games & <em>Activities</em></h2></div>
+        <div class="card-grid">
+          <div class="card"><div class="card-icon">🏆</div><h3>Competitions</h3><p>Multiple board game tournaments for players of all levels.</p></div>
+          <div class="card"><div class="card-icon">🃏</div><h3>MTG Tournament</h3><p>Magic: The Gathering – cube draft for 8–12 players and Judges tower event.</p></div>
+          <div class="card"><div class="card-icon">🎭</div><h3>Role-playing Games</h3><p>Jukka Taipale runs RPG sessions both days at Rokkikoulu from 11:00 to 15:00.</p></div>
+          <div class="card"><div class="card-icon">🛒</div><h3>Game Flea Market</h3><p>Buy, sell and trade used board games. Bring your surplus games or find new treasures!</p></div>
+          <div class="card"><div class="card-icon">👶</div><h3>Children's Play Area</h3><p>Saturday 12:00–16:00 at Lasikoppi – parents can game in peace!</p></div>
+          <div class="card"><div class="card-icon">🎲</div><h3>Open Gaming Hall</h3><p>A wide collection of up to 150 board games available to play. You can also bring your own games to play on-site.</p></div>
+        </div>`,
+
+      partners: `
+        <div class="page-header"><h2>Our <em>Partners</em></h2></div>
+        <p class="partners-intro">BoardGamesKokkola is made possible thanks to our partners and sponsors. A warm thank you to everyone who helps make this event happen!</p>
+        <div class="partners-tier">
+          <div class="partners-tier-title">🤝 Partners</div>
+          <div class="partners-grid">
+            ${MINIMANI_CARD_EN}
+            ${KPO_CARD_EN}
+            ${TORSO_CARD_EN}
+            ${NUORISOPALVELUT_CARD_EN}
+            ${SUOMALAINEN_CARD_EN}
+          </div>
+        </div>
+        <div class="become-partner">
+          <div class="become-partner-text">
+            <h3>Become a Partner!</h3>
+            <p>Want visibility at BoardGamesKokkola 2026? We welcome new partners and sponsors. Get in touch and we'll tell you more about the opportunities!</p>
+          </div>
+          <a href="mailto:boardgamekokkola@gmail.com" class="become-partner-btn">Get in Touch →</a>
+        </div>`,
+
+      social: `
+        <div class="page-header"><h2>Follow <em>Us</em></h2></div>
+        <div class="instagram-section">
+          <p class="insta-handle">@kokkolabgk</p>
+          <div class="insta-embed-wrapper">
+            <div class="elfsight-app-9b1b3317-5019-4fb5-8c58-4e40b5bc20a9" data-elfsight-app-lazy></div>
+          </div>
+          <div class="social-bar">
+            <a href="https://www.instagram.com/kokkolabgk" target="_blank" class="social-btn instagram">${IG_ICON} Instagram</a>
+            <a href="https://www.facebook.com/BoardGamesKokkola/" target="_blank" class="social-btn facebook">${FB_ICON} Facebook</a>
+            <a href="https://www.tiktok.com/@boardgameskokkola" target="_blank" class="social-btn tiktok">${TT_ICON} TikTok</a>
+          </div>
+        </div>`,
+
+      contact: `
+        <div class="page-header"><h2>Contact & <em>Location</em></h2></div>
+        <div class="contact-grid">
+          <div class="contact-card"><span class="cc-icon">📍</span><h3>Address</h3><p>Youth Center Vinge<br>Puutarhakatu 2<br>67100 Kokkola, Finland</p></div>
+          <div class="contact-card"><span class="cc-icon">📧</span><h3>Email</h3><a href="mailto:boardgamekokkola@gmail.com">boardgamekokkola@gmail.com</a></div>
+          <div class="contact-card">${IG_ICON}<h3>Instagram</h3><a href="https://www.instagram.com/kokkolabgk" target="_blank">@kokkolabgk</a></div>
+          <div class="contact-card">${FB_ICON}<h3>Facebook</h3><a href="https://www.facebook.com/BoardGamesKokkola/" target="_blank">BoardGamesKokkola</a></div>
+          <div class="contact-card">${TT_ICON}<h3>TikTok</h3><a href="https://www.tiktok.com/@boardgameskokkola" target="_blank">@boardgameskokkola</a></div>
+        </div>
+        <div class="map-container">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1834.3!2d23.1241!3d63.8367!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x465f7b1a8b1a8b1a%3A0x0!2sPuutarhakatu+2%2C+Kokkola!5e0!3m2!1sfi!2sfi!4v1" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+        ${CONTACT_FORM_EN}`,
+    }
+  }
+};
+
+let currentLang = 'fi';
+let currentPage = 'home';
+
+function renderNav() {
+  const nav = document.getElementById('main-nav');
+  nav.innerHTML = Object.keys(T[currentLang].nav).map(k => `
+    <button class="nav-link ${currentPage === k ? 'active' : ''}"
+            onclick="navigate('${k}','${currentLang}')">${T[currentLang].nav[k]}</button>
+  `).join('');
+}
+
+function navigate(page, lang) {
+  currentPage = page; currentLang = lang;
+  renderNav(); renderPage(); updateLangButtons();
+}
+
+function setLang(lang) { navigate(currentPage, lang); }
+
+function updateLangButtons() {
+  ['fi','sv','en'].forEach(l => document.getElementById('btn-'+l).classList.toggle('active', l === currentLang));
+  document.getElementById('header-tagline').textContent = T[currentLang].tagline;
+}
+
+function renderPage() {
+  document.getElementById('main-content').innerHTML = `<div class="page active">${T[currentLang].pages[currentPage]}</div>`;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  // Käynnistä Elfsight uudelleen jos widget on näkyvissä
+  if (window.eapps && window.eapps.Platform) {
+    window.eapps.Platform.initialize();
+  }
+}
+
+renderNav();
+renderPage();
+</script>
+</body>
+</html>
