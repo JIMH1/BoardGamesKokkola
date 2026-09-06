@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="fi">
 <head>
+<link rel="icon" type="image/x-icon" href="favicon.ico">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="BoardGamesKokkola on Kokkolan lautapelitapahtuma ja lautapeliyhteisö. Tule pelaamaan lautapelejä, roolipelejä, Magic: The Gatheringia ja tutustumaan uusiin harrastajiin.">
 <title>BoardGamesKokkola – Lautapelitapahtuma</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;600;700&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
@@ -194,6 +196,7 @@
 
 <footer>
   <span id="footer-text">Copyright: Juha-Matti Huhtala 2026</span>
+  <div id="footer-disclaimer" style="font-size:0.65rem; letter-spacing:0.08em; margin-top:0.5rem; opacity:0.75;">Pidätämme oikeudet muutoksiin.</div>
 </footer>
 
 <!-- Directions popup FI -->
@@ -384,6 +387,48 @@ const NUORISOPALVELUT_CARD_EN = `
   </div>
 </a>`;
 
+const NUORISOVALTUUSTO_CARD = `
+<a href="https://www.kokkola.fi/vapaa-aika/nuoriso/nuorten-osallisuus/nuorisovaltuusto/" target="_blank" class="partner-card">
+  <div class="partner-logo-wrap">
+    <img src="https://www.kokkola.fi/tyyli/kuvat/kokkola-logo.png"
+         alt="Kokkolan kaupunki"
+         onerror="this.style.display='none';this.parentNode.innerHTML='<span class=\\'partner-emoji\\'>🏛️</span>'">
+  </div>
+  <div class="partner-info">
+    <div class="partner-name">Kokkolan Nuorisovaltuusto</div>
+    <div class="partner-desc">kokkola.fi/vapaa-aika/nuoriso/nuorten-osallisuus/nuorisovaltuusto</div>
+    <span class="partner-badge">Yhteistyökumppani</span>
+  </div>
+</a>`;
+
+const NUORISOVALTUUSTO_CARD_SV = `
+<a href="https://www.kokkola.fi/vapaa-aika/nuoriso/nuorten-osallisuus/nuorisovaltuusto/" target="_blank" class="partner-card">
+  <div class="partner-logo-wrap">
+    <img src="https://www.kokkola.fi/tyyli/kuvat/kokkola-logo.png"
+         alt="Karleby stad"
+         onerror="this.style.display='none';this.parentNode.innerHTML='<span class=\\'partner-emoji\\'>🏛️</span>'">
+  </div>
+  <div class="partner-info">
+    <div class="partner-name">Karleby Ungdomsfullmäktige</div>
+    <div class="partner-desc">kokkola.fi/vapaa-aika/nuoriso/nuorten-osallisuus/nuorisovaltuusto</div>
+    <span class="partner-badge">Samarbetspartner</span>
+  </div>
+</a>`;
+
+const NUORISOVALTUUSTO_CARD_EN = `
+<a href="https://www.kokkola.fi/vapaa-aika/nuoriso/nuorten-osallisuus/nuorisovaltuusto/" target="_blank" class="partner-card">
+  <div class="partner-logo-wrap">
+    <img src="https://www.kokkola.fi/tyyli/kuvat/kokkola-logo.png"
+         alt="City of Kokkola"
+         onerror="this.style.display='none';this.parentNode.innerHTML='<span class=\\'partner-emoji\\'>🏛️</span>'">
+  </div>
+  <div class="partner-info">
+    <div class="partner-name">Kokkola Youth council</div>
+    <div class="partner-desc">kokkola.fi/vapaa-aika/nuoriso/nuorten-osallisuus/nuorisovaltuusto</div>
+    <span class="partner-badge">Partner</span>
+  </div>
+</a>`;
+
 const SUOMALAINEN_CARD = `
 <a href="https://www.suomalainen.com/" target="_blank" class="partner-card">
   <div class="partner-logo-wrap">
@@ -422,6 +467,216 @@ const SUOMALAINEN_CARD_EN = `
   <div class="partner-info">
     <div class="partner-name">Suomalainen Kirjakauppa</div>
     <div class="partner-desc">suomalainen.com</div>
+    <span class="partner-badge">Partner</span>
+  </div>
+</a>`;
+
+const KAUPUNKI_CARD = `
+<a href="https://www.kokkola.fi/" target="_blank" class="partner-card">
+  <div class="partner-logo-wrap">
+    <img src="https://www.kokkola.fi/tyyli/kuvat/kokkola-logo.png"
+         alt="Kokkolan kaupunki"
+         onerror="this.style.display='none';this.parentNode.innerHTML='<span class=\\'partner-emoji\\'>🏙️</span>'">
+  </div>
+  <div class="partner-info">
+    <div class="partner-name">Kokkolan kaupunki</div>
+    <div class="partner-desc">kokkola.fi</div>
+    <span class="partner-badge">Yhteistyökumppani</span>
+  </div>
+</a>`;
+
+const KAUPUNKI_CARD_SV = `
+<a href="https://www.kokkola.fi/" target="_blank" class="partner-card">
+  <div class="partner-logo-wrap">
+    <img src="https://www.kokkola.fi/tyyli/kuvat/kokkola-logo.png"
+         alt="Karleby stad"
+         onerror="this.style.display='none';this.parentNode.innerHTML='<span class=\\'partner-emoji\\'>🏙️</span>'">
+  </div>
+  <div class="partner-info">
+    <div class="partner-name">Karleby stad</div>
+    <div class="partner-desc">kokkola.fi</div>
+    <span class="partner-badge">Samarbetspartner</span>
+  </div>
+</a>`;
+
+const KAUPUNKI_CARD_EN = `
+<a href="https://www.kokkola.fi/" target="_blank" class="partner-card">
+  <div class="partner-logo-wrap">
+    <img src="https://www.kokkola.fi/tyyli/kuvat/kokkola-logo.png"
+         alt="City of Kokkola"
+         onerror="this.style.display='none';this.parentNode.innerHTML='<span class=\\'partner-emoji\\'>🏙️</span>'">
+  </div>
+  <div class="partner-info">
+    <div class="partner-name">City of Kokkola</div>
+    <div class="partner-desc">kokkola.fi</div>
+    <span class="partner-badge">Partner</span>
+  </div>
+</a>`;
+
+const JYMY_CARD = `
+<a href="https://www.kokkolanjymy.fi/" target="_blank" class="partner-card">
+  <div class="partner-logo-wrap">
+    <img src="https://www.kokkolanjymy.fi/wp-content/uploads/2020/01/jymy-logo.png"
+         alt="Kokkolan Jymy"
+         onerror="this.style.display='none';this.parentNode.innerHTML='<span class=\\'partner-emoji\\'>🏋️</span>'">
+  </div>
+  <div class="partner-info">
+    <div class="partner-name">Kokkolan Jymy</div>
+    <div class="partner-desc">kokkolanjymy.fi</div>
+    <span class="partner-badge">Yhteistyökumppani</span>
+  </div>
+</a>`;
+
+const JYMY_CARD_SV = `
+<a href="https://www.kokkolanjymy.fi/" target="_blank" class="partner-card">
+  <div class="partner-logo-wrap">
+    <img src="https://www.kokkolanjymy.fi/wp-content/uploads/2020/01/jymy-logo.png"
+         alt="Kokkolan Jymy"
+         onerror="this.style.display='none';this.parentNode.innerHTML='<span class=\\'partner-emoji\\'>🏋️</span>'">
+  </div>
+  <div class="partner-info">
+    <div class="partner-name">Kokkolan Jymy</div>
+    <div class="partner-desc">kokkolanjymy.fi</div>
+    <span class="partner-badge">Samarbetspartner</span>
+  </div>
+</a>`;
+
+const JYMY_CARD_EN = `
+<a href="https://www.kokkolanjymy.fi/" target="_blank" class="partner-card">
+  <div class="partner-logo-wrap">
+    <img src="https://www.kokkolanjymy.fi/wp-content/uploads/2020/01/jymy-logo.png"
+         alt="Kokkolan Jymy"
+         onerror="this.style.display='none';this.parentNode.innerHTML='<span class=\\'partner-emoji\\'>🏋️</span>'">
+  </div>
+  <div class="partner-info">
+    <div class="partner-name">Kokkolan Jymy</div>
+    <div class="partner-desc">kokkolanjymy.fi</div>
+    <span class="partner-badge">Partner</span>
+  </div>
+</a>`;
+
+const BIOREX_CARD = `
+<a href="https://biorex.org/?lang=fi" target="_blank" class="partner-card">
+  <div class="partner-logo-wrap">
+    <img src="https://biorex.org/wp-content/uploads/2020/01/biorex-logo.png"
+         alt="Biorex"
+         onerror="this.style.display='none';this.parentNode.innerHTML='<span class=\\'partner-emoji\\'>🎬</span>'">
+  </div>
+  <div class="partner-info">
+    <div class="partner-name">Biorex</div>
+    <div class="partner-desc">biorex.org</div>
+    <span class="partner-badge">Yhteistyökumppani</span>
+  </div>
+</a>`;
+
+const BIOREX_CARD_SV = `
+<a href="https://biorex.org/?lang=fi" target="_blank" class="partner-card">
+  <div class="partner-logo-wrap">
+    <img src="https://biorex.org/wp-content/uploads/2020/01/biorex-logo.png"
+         alt="Biorex"
+         onerror="this.style.display='none';this.parentNode.innerHTML='<span class=\\'partner-emoji\\'>🎬</span>'">
+  </div>
+  <div class="partner-info">
+    <div class="partner-name">Biorex</div>
+    <div class="partner-desc">biorex.org</div>
+    <span class="partner-badge">Samarbetspartner</span>
+  </div>
+</a>`;
+
+const BIOREX_CARD_EN = `
+<a href="https://biorex.org/?lang=fi" target="_blank" class="partner-card">
+  <div class="partner-logo-wrap">
+    <img src="https://biorex.org/wp-content/uploads/2020/01/biorex-logo.png"
+         alt="Biorex"
+         onerror="this.style.display='none';this.parentNode.innerHTML='<span class=\\'partner-emoji\\'>🎬</span>'">
+  </div>
+  <div class="partner-info">
+    <div class="partner-name">Biorex</div>
+    <div class="partner-desc">biorex.org</div>
+    <span class="partner-badge">Partner</span>
+  </div>
+</a>`;
+
+const HESBURGER_CARD = `
+<a href="https://www.hesburger.fi/" target="_blank" class="partner-card">
+  <div class="partner-logo-wrap">
+    <img src="https://www.hesburger.fi/favicon.ico"
+         alt="Hesburger"
+         onerror="this.style.display='none';this.parentNode.innerHTML='<span class=\\'partner-emoji\\'>🍔</span>'">
+  </div>
+  <div class="partner-info">
+    <div class="partner-name">Hesburger</div>
+    <div class="partner-desc">hesburger.fi</div>
+    <span class="partner-badge">Yhteistyökumppani</span>
+  </div>
+</a>`;
+
+const HESBURGER_CARD_SV = `
+<a href="https://www.hesburger.fi/" target="_blank" class="partner-card">
+  <div class="partner-logo-wrap">
+    <img src="https://www.hesburger.fi/favicon.ico"
+         alt="Hesburger"
+         onerror="this.style.display='none';this.parentNode.innerHTML='<span class=\\'partner-emoji\\'>🍔</span>'">
+  </div>
+  <div class="partner-info">
+    <div class="partner-name">Hesburger</div>
+    <div class="partner-desc">hesburger.fi</div>
+    <span class="partner-badge">Samarbetspartner</span>
+  </div>
+</a>`;
+
+const HESBURGER_CARD_EN = `
+<a href="https://www.hesburger.fi/" target="_blank" class="partner-card">
+  <div class="partner-logo-wrap">
+    <img src="https://www.hesburger.fi/favicon.ico"
+         alt="Hesburger"
+         onerror="this.style.display='none';this.parentNode.innerHTML='<span class=\\'partner-emoji\\'>🍔</span>'">
+  </div>
+  <div class="partner-info">
+    <div class="partner-name">Hesburger</div>
+    <div class="partner-desc">hesburger.fi</div>
+    <span class="partner-badge">Partner</span>
+  </div>
+</a>`;
+
+const HERKKUPIZZA_CARD = `
+<a href="https://herkkupizza.fi/index.html" target="_blank" class="partner-card">
+  <div class="partner-logo-wrap">
+    <img src="https://herkkupizza.fi/favicon.ico"
+         alt="Herkkupizza"
+         onerror="this.style.display='none';this.parentNode.innerHTML='<span class=\\'partner-emoji\\'>🍕</span>'">
+  </div>
+  <div class="partner-info">
+    <div class="partner-name">Herkkupizza</div>
+    <div class="partner-desc">herkkupizza.fi</div>
+    <span class="partner-badge">Yhteistyökumppani</span>
+  </div>
+</a>`;
+
+const HERKKUPIZZA_CARD_SV = `
+<a href="https://herkkupizza.fi/index.html" target="_blank" class="partner-card">
+  <div class="partner-logo-wrap">
+    <img src="https://herkkupizza.fi/favicon.ico"
+         alt="Herkkupizza"
+         onerror="this.style.display='none';this.parentNode.innerHTML='<span class=\\'partner-emoji\\'>🍕</span>'">
+  </div>
+  <div class="partner-info">
+    <div class="partner-name">Herkkupizza</div>
+    <div class="partner-desc">herkkupizza.fi</div>
+    <span class="partner-badge">Samarbetspartner</span>
+  </div>
+</a>`;
+
+const HERKKUPIZZA_CARD_EN = `
+<a href="https://herkkupizza.fi/index.html" target="_blank" class="partner-card">
+  <div class="partner-logo-wrap">
+    <img src="https://herkkupizza.fi/favicon.ico"
+         alt="Herkkupizza"
+         onerror="this.style.display='none';this.parentNode.innerHTML='<span class=\\'partner-emoji\\'>🍕</span>'">
+  </div>
+  <div class="partner-info">
+    <div class="partner-name">Herkkupizza</div>
+    <div class="partner-desc">herkkupizza.fi</div>
     <span class="partner-badge">Partner</span>
   </div>
 </a>`;
@@ -556,6 +811,7 @@ const TT_ICON = `<svg class="social-logo" viewBox="0 0 24 24" xmlns="http://www.
 const T = {
   fi: {
     tagline: 'Lautapelitapahtuma',
+    disclaimer: 'Pidätämme oikeudet muutoksiin.',
     nav: { home: 'Etusivu', info: 'Tietoa', program: 'Ohjelma', games: 'Pelit', partners: 'Yhteistyökumppanit', social: 'Seuraa', contact: 'Yhteystiedot' },
     pages: {
       home: `
@@ -603,6 +859,11 @@ const T = {
             <div class="card-icon">🎟️</div>
             <h3>Pääsymaksu</h3>
             <p>Tapahtuma on <strong style="color:var(--gold-light)">ilmainen</strong>. Tapahtumassa on mahdollisuus ostaa pientä purtavaa ja kahvituotteita.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon">🍔</div>
+            <h3>Ruokailu</h3>
+            <p>Tapahtumassa on mahdollista tilata omakustanteisesti ruokaa BGK:n yhteistyökumppaneilta alennettuun hintaan yhteisen ruokatilauksen kautta. Ruokapaikkoina toimivat Hesburger ja Herkkupizza.</p>
           </div>
           <div class="card">
             <div class="card-icon">👨‍👩‍👧‍👦</div>
@@ -668,19 +929,26 @@ const T = {
         <table class="schedule-table">
           <thead><tr><th>Aika</th><th>Tapahtuma</th><th>Paikka</th></tr></thead>
           <tbody>
-			<h3>Tapahtuman ohjelma on alustava. Ohjelmiin saattaa tulla muutoksia lähempänä syyskuuta. </h3>
-            <tr class="day-header"><td colspan="3">Lauantai 26.9.2026 · Klo 10–23</td></tr>
-            <tr><td>10:00–11:00</td><td>Vapaa-aika</td><td>–</td></tr>
-            <tr><td>11:00–15:00</td><td>Jukka Taipale roolipelit</td><td>Rokkikoulu</td></tr>
-            <tr><td>12:00–16:00</td><td>Lapsiparkki</td><td>Lasikoppi</td></tr>
-            <tr><td>21:00–23:00</td><td>Vapaata pelailua – ei enää aloiteta ohjelmanumeroita</td><td>–</td></tr>
-            <tr><td>23:00</td><td>Porukka pihalle</td><td>–</td></tr>
-            <tr class="day-header"><td colspan="3">Sunnuntai 27.9.2026 · Klo 9–23</td></tr>
-            <tr><td>11:00–15:00</td><td>Jukka Taipale roolipelit</td><td>Rokkikoulu</td></tr>
-            <tr><td>12:30–16:00</td><td>MTG cube draft 8–12 osallistujaa</td><td>Lavalla</td></tr>
-            <tr><td>16:30</td><td>Judges tower MTG</td><td>Lavalla</td></tr>
-            <tr><td>21:00–23:00</td><td>Vapaata pelailua – ei enää aloiteta ohjelmanumeroita</td><td>–</td></tr>
-            <tr><td>23:00</td><td>Porukka pihalle</td><td>–</td></tr>
+            <tr class="day-header"><td colspan="3">Lauantai 26.9.2026 · Klo 10–22</td></tr>
+            <tr><td>10:00</td><td>Tapahtuma alkaa, avajaistapahtuma ulkona</td><td>–</td></tr>
+            <tr><td>10:00</td><td>Word and Void – roolipeliin ilmoittautuminen (5 pelaajaa max)</td><td>Info</td></tr>
+            <tr><td>11:00–15:00</td><td>Word and Void – roolipeli</td><td>Rokkikoulu</td></tr>
+            <tr><td>11:00–12:00</td><td>Epicalyx – lautapelin esittely ja pelaaminen</td><td>–</td></tr>
+            <tr><td>11:00–12:30</td><td>Ruokatilausten vastaanotto</td><td>–</td></tr>
+            <tr><td>12:00–18:00</td><td>Lapsiparkki toiminnassa</td><td>Lasikoppi</td></tr>
+            <tr><td>15:00</td><td>Ruoat saapuvat</td><td>–</td></tr>
+            <tr><td>10:00–22:00</td><td>Vapaata pelaamista</td><td>–</td></tr>
+            <tr><td>22:00</td><td>Ensimmäinen päivä päättyy</td><td>–</td></tr>
+            <tr class="day-header"><td colspan="3">Sunnuntai 27.9.2026 · Klo 9–21</td></tr>
+            <tr><td>9:00</td><td>Ovet aukeavat</td><td>–</td></tr>
+            <tr><td>9:00</td><td>Word and Void – roolipeliin ilmoittautuminen</td><td>Info</td></tr>
+            <tr><td>11:00–15:00</td><td>Word and Void – roolipeli</td><td>Rokkikoulu</td></tr>
+            <tr><td>11:00–12:00</td><td>Epicalyx – lautapelin esittely ja pelaaminen</td><td>–</td></tr>
+            <tr><td>11:00–12:30</td><td>Ruokatilausten vastaanotto</td><td>–</td></tr>
+            <tr><td>12:30</td><td>MTG cube draft (8–12 pelaajaa)</td><td>Lava</td></tr>
+            <tr><td>15:00</td><td>Ruoat saapuvat</td><td>–</td></tr>
+            <tr><td>09:00–21:00</td><td>Vapaata pelaamista</td><td>–</td></tr>
+            <tr><td>21:00</td><td>Tapahtuma päättyy</td><td>–</td></tr>
           </tbody>
         </table>`,
 
@@ -689,9 +957,9 @@ const T = {
         <div class="card-grid">
           <div class="card"><div class="card-icon">🏆</div><h3>Kilpailut</h3><p>Useita lautapelikilpailuja kaiken tasoisille pelaajille. </p></div>
           <div class="card"><div class="card-icon">🃏</div><h3>MTG-Turnaus</h3><p>Magic: The Gathering – cube draft (8–12 osallistujaa) sekä Judges tower MTG.</p></div>
-          <div class="card"><div class="card-icon">🎭</div><h3>Roolipelit</h3><p>Jukka Taipale vetää roolipelejä molempina päivinä Rokkikoulussa klo 11–15.</p></div>
+          <div class="card"><div class="card-icon">🎭</div><h3>Roolipelit</h3><p>Word and Void - roolipeli molempina päivinä Rokkikoulussa klo 11–15.</p></div>
           <div class="card"><div class="card-icon">🛒</div><h3>Pelikirppis</h3><p>Osta, myy ja vaihda käytettyjä lautapelejä. Tuo omat ylimääräiset pelisi myyntiin!</p></div>
-          <div class="card"><div class="card-icon">👶</div><h3>Lapsiparkki</h3><p>Lauantaina klo 12–16 Lasikopin tiloissa – vanhemmat voivat pelata rauhassa!</p></div>
+          <div class="card"><div class="card-icon">👶</div><h3>Lapsiparkki</h3><p>Lauantaina klo 12–18 Lasikopin tiloissa – vanhemmat voivat pelata rauhassa!</p></div>
           <div class="card"><div class="card-icon">🎲</div><h3>Avoin Pelisali</h3><p>Tarjolla laaja, jopa 150 lautapelin kokoelma pelattavaksi. Voit myös tuoda omia pelejä pelattavaksi paikanpäälle.</p></div>
         </div>`,
 
@@ -706,6 +974,12 @@ const T = {
             ${TORSO_CARD}
             ${NUORISOPALVELUT_CARD}
             ${SUOMALAINEN_CARD}
+            ${KAUPUNKI_CARD}
+            ${JYMY_CARD}
+            ${BIOREX_CARD}
+            ${HESBURGER_CARD}
+            ${HERKKUPIZZA_CARD}
+            ${NUORISOVALTUUSTO_CARD}
           </div>
         </div>
         <div class="become-partner">
@@ -748,6 +1022,7 @@ const T = {
 
   sv: {
     tagline: 'Brädspelsevent',
+    disclaimer: 'Vi förbehåller oss rätten till ändringar.',
     nav: { home: 'Hem', info: 'Info', program: 'Program', games: 'Spel', partners: 'Samarbetspartners', social: 'Följ oss', contact: 'Kontakt' },
     pages: {
       home: `
@@ -794,6 +1069,11 @@ const T = {
             <div class="card-icon">🎟️</div>
             <h3>Inträde</h3>
             <p>Eventet är <strong style="color:var(--gold-light)">gratis</strong>. Det finns möjlighet att köpa småtugg och kaffe på plats.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon">🍔</div>
+            <h3>Mat</h3>
+            <p>Under eventet är det möjligt att på egen bekostnad beställa mat från BGK:s samarbetspartners till rabatterat pris via en gemensam matbeställning. Matställena är Hesburger och Herkkupizza.</p>
           </div>
           <div class="card">
             <div class="card-icon">👨‍👩‍👧‍👦</div>
@@ -863,19 +1143,26 @@ Anmäl situationen så snart som möjligt genom att tala direkt med en eventorga
         <table class="schedule-table">
           <thead><tr><th>Tid</th><th>Aktivitet</th><th>Plats</th></tr></thead>
           <tbody>
-			<h3>Programmet är preliminärt. Ändringar kan förekomma närmre september.</h3>
-            <tr class="day-header"><td colspan="3">Lördag 26.9.2026 · Kl. 10–23</td></tr>
-            <tr><td>10:00–11:00</td><td>Fri tid</td><td>–</td></tr>
-            <tr><td>11:00–15:00</td><td>Jukka Taipale rollspel (Rokkikoulu)</td><td>Rokkikoulu</td></tr>
-            <tr><td>12:00–16:00</td><td>Barnparkering</td><td>Lasikoppi</td></tr>
-            <tr><td>21:00–23:00</td><td>Fritt spelande – inga nya programnummer startas</td><td>–</td></tr>
-            <tr><td>23:00</td><td>Alla ut</td><td>–</td></tr>
-            <tr class="day-header"><td colspan="3">Söndag 27.9.2026 · Kl. 9–23</td></tr>
-            <tr><td>11:00–15:00</td><td>Jukka Taipale rollspel (Rokkikoulu)</td><td>Rokkikoulu</td></tr>
-            <tr><td>12:30–16:00</td><td>MTG cube draft 8–12 deltagare</td><td>Scenen</td></tr>
-            <tr><td>16:30</td><td>Judges tower MTG</td><td>Scenen</td></tr>
-            <tr><td>21:00–23:00</td><td>Fritt spelande – inga nya programnummer startas</td><td>–</td></tr>
-            <tr><td>23:00</td><td>Alla ut</td><td>–</td></tr>
+            <tr class="day-header"><td colspan="3">Lördag 26.9.2026 · Kl. 10–22</td></tr>
+            <tr><td>10:00</td><td>Eventet börjar, invigning utomhus</td><td>–</td></tr>
+            <tr><td>10:00</td><td>Word and Void – anmälan till rollspelet (max 5 spelare)</td><td>Info</td></tr>
+            <tr><td>11:00–15:00</td><td>Word and Void – rollspel</td><td>Rokkikoulu</td></tr>
+            <tr><td>11:00–12:00</td><td>Epicalyx – presentation och spel av brädspelet</td><td>–</td></tr>
+            <tr><td>11:00–12:30</td><td>Mottagning av matbeställningar</td><td>–</td></tr>
+            <tr><td>12:00–18:00</td><td>Barnparkering i verksamhet</td><td>Lasikoppi</td></tr>
+            <tr><td>15:00</td><td>Maten anländer</td><td>–</td></tr>
+            <tr><td>10:00–22:00</td><td>Öppet spel</td><td>–</td></tr>
+            <tr><td>22:00</td><td>Första dagen avslutas</td><td>–</td></tr>
+            <tr class="day-header"><td colspan="3">Söndag 27.9.2026 · Kl. 9–21</td></tr>
+            <tr><td>9:00</td><td>Dörrarna öppnas</td><td>–</td></tr>
+            <tr><td>9:00</td><td>Word and Void – anmälan till rollspelet</td><td>Info</td></tr>
+            <tr><td>11:00–15:00</td><td>Word and Void – rollspel</td><td>Rokkikoulu</td></tr>
+            <tr><td>11:00–12:00</td><td>Epicalyx – presentation och spel av brädspelet</td><td>–</td></tr>
+            <tr><td>11:00–12:30</td><td>Mottagning av matbeställningar</td><td>–</td></tr>
+            <tr><td>12:30</td><td>MTG cube draft (8–12 deltagare)</td><td>Scenen</td></tr>
+            <tr><td>15:00</td><td>Maten anländer</td><td>–</td></tr>
+            <tr><td>09:00–21:00</td><td>Öppet spel</td><td>–</td></tr>
+            <tr><td>21:00</td><td>Eventet slutar</td><td>–</td></tr>
           </tbody>
         </table>`,
 
@@ -884,9 +1171,9 @@ Anmäl situationen så snart som möjligt genom att tala direkt med en eventorga
         <div class="card-grid">
           <div class="card"><div class="card-icon">🏆</div><h3>Tävlingar</h3><p>Flera brädspelstävlingar för spelare på alla nivåer.</p></div>
           <div class="card"><div class="card-icon">🃏</div><h3>MTG-Turnering</h3><p>Magic: The Gathering – cube draft för 8–12 deltagare samt Judges tower.</p></div>
-          <div class="card"><div class="card-icon">🎭</div><h3>Rollspel</h3><p>Jukka Taipale leder rollspel båda dagarna på Rokkikoulu kl. 11–15.</p></div>
+          <div class="card"><div class="card-icon">🎭</div><h3>Rollspel</h3><p>Word and Void - rollspel båda dagarna på Rokkikoulu kl. 11–15.</p></div>
           <div class="card"><div class="card-icon">🛒</div><h3>Spelmarknad</h3><p>Köp, sälj och byt begagnade brädspel. Ta med dina egna överskottsspel!</p></div>
-          <div class="card"><div class="card-icon">👶</div><h3>Barnparkering</h3><p>Lördag kl. 12–16 i Lasikoppi – föräldrarna kan spela i lugn och ro!</p></div>
+          <div class="card"><div class="card-icon">👶</div><h3>Barnparkering</h3><p>Lördag kl. 12–18 i Lasikoppi – föräldrarna kan spela i lugn och ro!</p></div>
           <div class="card"><div class="card-icon">🎲</div><h3>Öppen Spelsal</h3><p>Ett brett utbud på upp till 150 brädspel att spela. Du kan också ta med egna spel att spela på plats.</p></div>
         </div>`,
 
@@ -901,6 +1188,12 @@ Anmäl situationen så snart som möjligt genom att tala direkt med en eventorga
             ${TORSO_CARD_SV}
             ${NUORISOPALVELUT_CARD_SV}
             ${SUOMALAINEN_CARD_SV}
+            ${KAUPUNKI_CARD_SV}
+            ${JYMY_CARD_SV}
+            ${BIOREX_CARD_SV}
+            ${HESBURGER_CARD_SV}
+            ${HERKKUPIZZA_CARD_SV}
+            ${NUORISOVALTUUSTO_CARD_SV}
           </div>
         </div>
         <div class="become-partner">
@@ -943,6 +1236,7 @@ Anmäl situationen så snart som möjligt genom att tala direkt med en eventorga
 
   en: {
     tagline: 'Board Game Event',
+    disclaimer: 'We reserve the right to make changes.',
     nav: { home: 'Home', info: 'Info', program: 'Program', games: 'Games', partners: 'Partners', social: 'Follow Us', contact: 'Contact' },
     pages: {
       home: `
@@ -989,6 +1283,11 @@ Anmäl situationen så snart som möjligt genom att tala direkt med en eventorga
             <div class="card-icon">🎟️</div>
             <h3>Entry Fee</h3>
             <p>The event is <strong style="color:var(--gold-light)">free of charge</strong>. Small snacks and coffee products will be available for purchase on site.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon">🍔</div>
+            <h3>Meals</h3>
+            <p>During the event it is possible to order food at your own cost from BGK's partners at a discounted price through a joint food order. The food vendors are Hesburger and Herkkupizza.</p>
           </div>
           <div class="card">
             <div class="card-icon">👨‍👩‍👧‍👦</div>
@@ -1055,19 +1354,26 @@ We report the matter as soon as possible by speaking directly to an event organi
         <table class="schedule-table">
           <thead><tr><th>Time</th><th>Activity</th><th>Location</th></tr></thead>
           <tbody>
-			<h3>The program is preliminary. Changes may occur closer to September.</h3>
-            <tr class="day-header"><td colspan="3">Saturday, September 26, 2026 · 10:00–23:00</td></tr>
-            <tr><td>10:00–11:00</td><td>Free time</td><td>–</td></tr>
-            <tr><td>11:00–15:00</td><td>Jukka Taipale Role-playing Games (Rokkikoulu)</td><td>Rokkikoulu</td></tr>
-            <tr><td>12:00–16:00</td><td>Children's play area</td><td>Lasikoppi</td></tr>
-            <tr><td>21:00–23:00</td><td>Free gaming – no new program items started</td><td>–</td></tr>
-            <tr><td>23:00</td><td>Closing time</td><td>–</td></tr>
-            <tr class="day-header"><td colspan="3">Sunday, September 27, 2026 · 09:00–23:00</td></tr>
-            <tr><td>11:00–15:00</td><td>Jukka Taipale Role-playing Games (Rokkikoulu)</td><td>Rokkikoulu</td></tr>
-            <tr><td>12:30–16:00</td><td>MTG cube draft 8–12 participants</td><td>Stage</td></tr>
-            <tr><td>16:30</td><td>Judges tower MTG</td><td>Stage</td></tr>
-            <tr><td>21:00–23:00</td><td>Free gaming – no new program items started</td><td>–</td></tr>
-            <tr><td>23:00</td><td>Closing time</td><td>–</td></tr>
+            <tr class="day-header"><td colspan="3">Saturday, September 26, 2026 · 10:00–22:00</td></tr>
+            <tr><td>10:00</td><td>Event begins, outdoor opening ceremony</td><td>–</td></tr>
+            <tr><td>10:00</td><td>Word and Void – RPG sign-up (max 5 players)</td><td>Info</td></tr>
+            <tr><td>11:00–15:00</td><td>Word and Void – role-playing game</td><td>Rokkikoulu</td></tr>
+            <tr><td>11:00–12:00</td><td>Epicalyx – board game demo and play</td><td>–</td></tr>
+            <tr><td>11:00–12:30</td><td>Food order collection</td><td>–</td></tr>
+            <tr><td>12:00–18:00</td><td>Children's play area open</td><td>Lasikoppi</td></tr>
+            <tr><td>15:00</td><td>Food arrives</td><td>–</td></tr>
+            <tr><td>10:00–22:00</td><td>Open gaming</td><td>–</td></tr>
+            <tr><td>22:00</td><td>End of day one</td><td>–</td></tr>
+            <tr class="day-header"><td colspan="3">Sunday, September 27, 2026 · 09:00–21:00</td></tr>
+            <tr><td>9:00</td><td>Doors open</td><td>–</td></tr>
+            <tr><td>9:00</td><td>Word and Void – RPG sign-up</td><td>Info</td></tr>
+            <tr><td>11:00–15:00</td><td>Word and Void – role-playing game</td><td>Rokkikoulu</td></tr>
+            <tr><td>11:00–12:00</td><td>Epicalyx – board game demo and play</td><td>–</td></tr>
+            <tr><td>11:00–12:30</td><td>Food order collection</td><td>–</td></tr>
+            <tr><td>12:30</td><td>MTG cube draft (8–12 players)</td><td>Stage</td></tr>
+            <tr><td>15:00</td><td>Food arrives</td><td>–</td></tr>
+            <tr><td>09:00–21:00</td><td>Open gaming</td><td>–</td></tr>
+            <tr><td>21:00</td><td>Event ends</td><td>–</td></tr>
           </tbody>
         </table>`,
 
@@ -1076,9 +1382,9 @@ We report the matter as soon as possible by speaking directly to an event organi
         <div class="card-grid">
           <div class="card"><div class="card-icon">🏆</div><h3>Competitions</h3><p>Multiple board game tournaments for players of all levels.</p></div>
           <div class="card"><div class="card-icon">🃏</div><h3>MTG Tournament</h3><p>Magic: The Gathering – cube draft for 8–12 players and Judges tower event.</p></div>
-          <div class="card"><div class="card-icon">🎭</div><h3>Role-playing Games</h3><p>Jukka Taipale runs RPG sessions both days at Rokkikoulu from 11:00 to 15:00.</p></div>
+          <div class="card"><div class="card-icon">🎭</div><h3>Role-playing Games</h3><p>Word and Void - a role-playing game both days at Rokkikoulu from 11:00 to 15:00.</p></div>
           <div class="card"><div class="card-icon">🛒</div><h3>Game Flea Market</h3><p>Buy, sell and trade used board games. Bring your surplus games or find new treasures!</p></div>
-          <div class="card"><div class="card-icon">👶</div><h3>Children's Play Area</h3><p>Saturday 12:00–16:00 at Lasikoppi – parents can game in peace!</p></div>
+          <div class="card"><div class="card-icon">👶</div><h3>Children's Play Area</h3><p>Saturday 12:00–18:00 at Lasikoppi – parents can game in peace!</p></div>
           <div class="card"><div class="card-icon">🎲</div><h3>Open Gaming Hall</h3><p>A wide collection of up to 150 board games available to play. You can also bring your own games to play on-site.</p></div>
         </div>`,
 
@@ -1093,6 +1399,12 @@ We report the matter as soon as possible by speaking directly to an event organi
             ${TORSO_CARD_EN}
             ${NUORISOPALVELUT_CARD_EN}
             ${SUOMALAINEN_CARD_EN}
+            ${KAUPUNKI_CARD_EN}
+            ${JYMY_CARD_EN}
+            ${BIOREX_CARD_EN}
+            ${HESBURGER_CARD_EN}
+            ${HERKKUPIZZA_CARD_EN}
+            ${NUORISOVALTUUSTO_CARD_EN}
           </div>
         </div>
         <div class="become-partner">
@@ -1155,6 +1467,7 @@ function setLang(lang) { navigate(currentPage, lang); }
 function updateLangButtons() {
   ['fi','sv','en'].forEach(l => document.getElementById('btn-'+l).classList.toggle('active', l === currentLang));
   document.getElementById('header-tagline').textContent = T[currentLang].tagline;
+  document.getElementById('footer-disclaimer').textContent = T[currentLang].disclaimer;
 }
 
 function renderPage() {
@@ -1170,5 +1483,19 @@ function renderPage() {
 renderNav();
 renderPage();
 </script>
+    <!-- Default Statcounter code for BoardGameKokkola https://bgk.gamer.gd/ -->
+<script type="text/javascript">
+var sc_project=13318716; 
+var sc_invisible=1; 
+var sc_security="2a2c5cf5"; 
+</script>
+<script type="text/javascript"
+src="https://www.statcounter.com/counter/counter.js" async></script>
+<noscript><div class="statcounter"><a title="Web Analytics Made Easy -
+Statcounter" href="https://statcounter.com/" target="_blank"><img
+class="statcounter" src="https://c.statcounter.com/13318716/0/2a2c5cf5/1/"
+alt="Web Analytics Made Easy - Statcounter"
+referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
+<!-- End of Statcounter Code -->
 </body>
 </html>
